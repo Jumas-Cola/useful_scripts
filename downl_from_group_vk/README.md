@@ -17,7 +17,7 @@ Necessary
 
 Optional
 ------------
-* <***owner***> - **123456789**(for user) OR **-123456789**(for group) **[default: your own wall]**
+* <***owner***> - **123456789**(user id) OR **-123456789**(group id) **[default: your own wall]**
 * <***count***> - count of 100-s(if count=5 : posts=500). If the number of posts is not a multiple of 100 - superfluous will be ignored. **[default: 1 (100 posts)]**
 * <***offset***> - offset from newest post **[default: 0]**
 * <***-sep***> - files to separate folders **[default: all in one folder]**
