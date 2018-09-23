@@ -94,7 +94,7 @@ photo_sizes = ['photo_2560', 'photo_1280', 'photo_807', 'photo_604', 'photo_130'
 num = 0
 
 for i in range(count):
-	posts = vk.method('wall.get', {'owner_id': owner, 'count': 100, 'filter': 'owner', 'offset': offset})['items']
+	posts = vk.method('wall.get', {'owner_id': owner, 'count': 100, 'filter': 'owner', 'offset': offset, 'v': '5.60'})['items']
 	for post in posts:
 		if 'attachments' in post:
 			for attachment in post['attachments']:
