@@ -36,12 +36,6 @@ def downloader(url, num, file, downl_try_count):
 		print("Download failed")
 		file_write("Download failed")
 
-"""
-login = '+79168450314'
-password = 'X-dcl6q6t7G@'
-# id владельца стены(в группах id с минусом)
-owner = -168416289
-"""
 if len(sys.argv) <3:
 	print("--------------------------------------------------\n")
 	print("Usage: downl_from_group_vk.py <login> <password> <owner> <count> <offset> <-sep> <-nd>\n")
