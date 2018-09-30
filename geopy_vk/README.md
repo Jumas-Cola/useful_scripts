@@ -15,7 +15,7 @@ geopy_vk ![Python 3.6](https://pp.userapi.com/c846523/v846523407/b716d/N3RXKWFcP
 place = 'Orekhovo-Zuyevo'
 lat = '55.8034354'
 long = '38.9667903'
-start_time = date_to_unixtime('2018.09.25')
+start_time = date_to_unixtime('2018.09.30')
 end_time = date_to_unixtime('2018.10.01')
 radius = 6000
 count = 1000
