@@ -32,9 +32,10 @@ from datetime import datetime
 from datetime import timedelta
 
 def date_to_unixtime(in_date):
-	year = int(in_date.split('.')[0])
-	month = int(in_date.split('.')[1].lstrip('0'))
-	day = int(in_date.split('.')[2].lstrip('0'))
+	date_list = in_date.split('.')
+	year = int(date_list[0])
+	month = int(date_list[1].lstrip('0'))
+	day = int(date_list[2].lstrip('0'))
 	return int((datetime(year, month, day) - datetime(1970, 1, 1)).total_seconds())
 
 def convertTSToDate(timestamp):
