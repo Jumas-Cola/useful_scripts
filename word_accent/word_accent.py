@@ -32,7 +32,7 @@ def txt_to_list(file_name):
     res_list = []
     with open(file_name) as file:
         for row in file:
-            res_list.append(row.rstrip('\n').lower())
+            res_list.append(row.rstrip('\n').strip().lower())
     return res_list
 
 
