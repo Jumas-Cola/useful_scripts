@@ -25,6 +25,8 @@ def word_accent(word):
         for sign in re.findall(pattern, word):
             word = word.replace(sign, sign[3:-4].lower()+'\'')
         res_array.append(word)
+    if res_array == []:
+        return [word]
     return res_array
 
 
