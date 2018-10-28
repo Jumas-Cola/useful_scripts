@@ -6,4 +6,4 @@ Some useful scripts ![Python 3.6](https://pp.userapi.com/c846523/v846523407/b716
 * **VK_API.cs** - C# класс для более удобного доступа к методам vk api
 * **word_accent** - скрипт для автоматической постановки ударения в словах
 * **melody_maker** - класс для более удобной работы с библиотекой chippy (написания мелодий буквами)
-* **jacobson_memory_test** - тест памяти по методике Джекобсона (https://www.psyoffice.ru/3-0-praktikum-00089.htm)
+* **jacobson_memory_test** - тест памяти по методике Джекобсона. Демо:(http://spacetriper.ru/jacobson_memory_test.html)
