@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="https://www.psyoffice.ru/templates/X38/images/favicon.ico" type="image/x-icon">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Исследование кратковременной памяти по методике Джекобсона</title>
+  </head>
+  <body>
+  	<section class="container mt-4">
+  		<h2>Исследование кратковременной памяти по методике Джекобсона</h2>
+
+  		<section id="main_sec" class="d-flex justify-content-center row">
+  			<section class="col-12 mt-4">
+  				Элементы ряда предъявляются с интервалом 1с. После прочтения каждого ряда по команде «Пишите!» испытуемые на листе для записей воспроизводят элементы ряда в том же порядке, в каком они предъявлялись экспериментатором. В каждой серии независимо от результата читаются все семь рядов. Инструкция во всех сериях опыта одинаковая. Интервал между сериями не менее 6-7 мин. (1 мин.)
+  				<br><br>
+				<b>Инструкция испытуемому:</b> «Я назову Вам несколько цифр. Слушайте внимательно и запоминайте их. По окончании чтения по моей команде "Пишите!", запишите то, что запомнили, в том же порядке, в каком читались цифры. Внимание! Начинаем!»
+				<br><br>
+				<b>Обработка результатов:</b> В процессе обработки результатов исследования необходимо установить:
+				<ul>
+					<li>ряды, воспроизведенные полностью и в той же последовательности, с которой они предъявлялись экспериментатором. Для удобства их обозначают знаком «+»;</li>
+					<li>наибольшую длину ряда, который испытуемый во всех сериях воспроизвел правильно;</li>
+					<li>количество правильно воспроизведенных рядов, больших, чем тот, который воспроизведен испытуемым во всех сериях;</li>
+					<li>коэффициент объема памяти, который вычисляют по формуле:</li>
+				</ul>
+				<section class="d-flex justify-content-center row">
+					<img src="https://www.psyoffice.ru/uploads/news/3/2012/praktikum-00089-0.gif">
+				</section>
+				<ul>
+					<li><b>Пк</b> – обозначение объема кратковременной памяти,</li>
+					<li><b>А</b> – наибольшая длина ряда, который испытуемый во всех опытах воспроизвел правильно;</li>
+					<li><b>С</b> – количество правильно воспроизведенных рядов, больших чем А;</li>
+					<li><b>n</b> – число серий опыта, в данном случае – 4.</li>
+				</ul>
+  			</section>
+  			<button type="button" class="btn btn-primary btn-lg mt-5 mb-5 col-2" onclick="start();return false;">Начать</button>
+  		</section>
+  	</section>
+    
+
+    
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <!-- Optional JavaScript -->
+    <script type="text/javascript">
+
+		function rand_nums(len){
+			var rand_nums='';
+			for (var i = 0; i < len; i++) {
+				rand_nums+=(Math.floor(Math.random()*(10)))
+			}
+			return rand_nums;
+		}
+
+		function show_num(){
+			(function() {
+				var i = -1;
+				return function() {
+					if ( ++i < rand_num.length ) {
+						$('#dialog_window').html('   ');
+						setTimeout(function(){$('#dialog_window').html(rand_num[ i ]);}, 500);
+						setTimeout( arguments.callee, 1500 );
+					} else {
+						$('#dialog_window').html('Пишите!');
+						$('#InputAnswer').prop('disabled', false);
+						$('#InputAnswer').focus();
+					}
+				}();
+			})();
+			$("#InputAnswer").prop('disabled', true);
+		}
+
+		function timer(sec){
+		    var timeleft = sec;
+		    var downloadTimer = setInterval(function(){
+		    timeleft--;
+		    $('#dialog_window').html('До следующей серии осталось: ' + timeleft);
+		    if(timeleft <= 0){
+		        clearInterval(downloadTimer);
+		        $('#dialog_window').html('Серия №'+(series_count+1));
+		        setTimeout("$('#dialog_window').html('Внимание! Начинаем!');", 1000);
+		    	setTimeout("show_num();", 2000);
+		    	}
+		    },1000);
+		}
+
+		function get_answer(){
+			/*console.log($('#InputAnswer').val(), rand_num);*/
+			if ($('#InputAnswer').val()==rand_num){
+				$('#dialog_window').html('   ');
+				$('#InputAnswer').val('');
+				succes_nums_arr.push(rand_num);
+			} else {
+				$('#dialog_window').html('   ');
+				$('#InputAnswer').val('');
+			};
+			num_len++;
+			rand_num = rand_nums(num_len);
+			if (num_len <= max_num_len){
+				show_num()
+			} else {
+				if (series_count < series-1){
+					series_count++;
+					num_len = 4;
+					rand_num = rand_nums(num_len);
+					timer(60);
+				} else {
+					$('#dialog_window').html('Ваш объем кратковременной памяти: ' + result_calculator().toFixed(2));
+					$('#form_sec').html('<table class="table mt-5"><thead class="thead-dark"><tr><th scope="col">Коэффициент объема памяти /Пк/</th><th scope="col">Уровень кратковременного запоминания</th></tr></thead><tbody><tr><th scope="row">10</th><td>очень высокий</td></tr><tr><th scope="row">8-9</th><td>высокий</td></tr><tr><th scope="row">7</th><td>средний</td></tr><tr><th scope="row">5-6</th><td>низкий</td></tr><tr><th scope="row">4</th><td>очень низкий</td></tr></tbody></table>');
+					/*console.log(succes_nums_arr);
+					console.log(lens_of_arr(succes_nums_arr));
+					console.log(max_len_in_all(lens_of_arr(succes_nums_arr)));
+					console.log(count_bigger_than_A(lens_of_arr(succes_nums_arr), max_len_in_all(lens_of_arr(succes_nums_arr))));*/
+				}
+			};
+		}
+
+		function lens_of_arr(arr){
+			var lens = []
+			arr.forEach(function(item, i, arr) {
+			  lens.push(item.length)
+			});
+			return lens
+		}
+
+		function count(array, elem){
+			var count = 0;
+			for(var i = 0; i < array.length; ++i){
+			    if(array[i] == elem)
+			        count++;
+			}
+			return count
+		}
+
+		function max_len_in_all(lens){
+			var max_len = 0;
+			for (var i = 0; i < lens.length; i++) {
+				if ((count(lens, lens[i]) == series) && (lens[i] > max_len)){
+					max_len = lens[i]
+				}
+			}
+			return max_len
+		}
+
+		function count_bigger_than_A(arr, A){
+			var count = 0;
+			for(var i = 0; i < arr.length; ++i){
+			    if(arr[i] > A)
+			        count++;
+			}
+			return count
+		}
+
+		function result_calculator(){
+			var A = max_len_in_all(lens_of_arr(succes_nums_arr));
+			var C = count_bigger_than_A(lens_of_arr(succes_nums_arr), A);
+			var n = series;
+			return (A + C/n)
+		}
+
+		function start(){
+			$('#main_sec').html('<h3 id="dialog_window" class="d-flex justify-content-center mt-5"></h3><section id="form_sec"><form><div class="form-group"><input type="number" class="form-control" id="InputAnswer" placeholder="Ответ"></div><button class="btn btn-primary" onclick="get_answer();return false;">Отправить</button></form></section>');
+			$("#main_sec").removeClass();
+			$('#dialog_window').html('Серия №'+(series_count+1));
+		    setTimeout("$('#dialog_window').html('Внимание! Начинаем!');", 1000);
+		    setTimeout("show_num();", 2000);
+		}
+
+
+		
+		/*mutable*/
+		var max_num_len = 10;
+		var series = 4;
+
+		var num_len = 4;
+		var series_count = 0;
+		var rand_num = rand_nums(num_len);
+		var succes_nums_arr = [];
+
+	</script>
+  </body>
+</html>
