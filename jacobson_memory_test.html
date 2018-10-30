@@ -18,7 +18,7 @@
 
   		<section id="main_sec" class="d-flex justify-content-center row">
   			<section class="col-12 mt-4">
-  				Элементы ряда предъявляются с интервалом 1с. После прочтения каждого ряда по команде «Пишите!» испытуемые на листе для записей воспроизводят элементы ряда в том же порядке, в каком они предъявлялись экспериментатором. В каждой серии независимо от результата читаются все семь рядов. Инструкция во всех сериях опыта одинаковая. Интервал между сериями не менее 6-7 мин. (1 мин.)
+  				Элементы ряда предъявляются с интервалом 1с. После прочтения каждого ряда по команде «Пишите!» испытуемые на листе для записей воспроизводят элементы ряда в том же порядке, в каком они предъявлялись экспериментатором. В каждой серии независимо от результата читаются все семь рядов. Инструкция во всех сериях опыта одинаковая. Интервал между сериями не менее 6-7 мин.
   				<br><br>
 				<b>Инструкция испытуемому:</b> «Я назову Вам несколько цифр. Слушайте внимательно и запоминайте их. По окончании чтения по моей команде "Пишите!", запишите то, что запомнили, в том же порядке, в каком читались цифры. Внимание! Начинаем!»
 				<br><br>
@@ -78,18 +78,9 @@
 			$("#InputAnswer").prop('disabled', true);
 		}
 
-		function timer(sec){
-		    var timeleft = sec;
-		    var downloadTimer = setInterval(function(){
-		    timeleft--;
-		    $('#dialog_window').html('До следующей серии осталось: ' + timeleft);
-		    if(timeleft <= 0){
-		        clearInterval(downloadTimer);
-		        $('#dialog_window').html('Серия №'+(series_count+1));
-		        setTimeout("$('#dialog_window').html('Внимание! Начинаем!');", 1000);
-		    	setTimeout("show_num();", 2000);
-		    	}
-		    },1000);
+		function waiter(sec){
+		    $('#main_sec').html('<h3 id="dialog_window" class="d-flex justify-content-center mt-5 col-12">Отдохните не менее 6-7 мин. и нажмите "Продолжить".</h3><button type="button" class="btn btn-primary btn-lg mt-5 mb-5 col-4" onclick="start();return false;">Продолжить</button>');
+		    $('#main_sec').addClass('d-flex justify-content-center row');
 		}
 
 		function get_answer(){
@@ -111,7 +102,7 @@
 					series_count++;
 					num_len = 4;
 					rand_num = rand_nums(num_len);
-					timer(60);
+					waiter(60);
 				} else {
 					$('#dialog_window').html('Ваш объем кратковременной памяти: ' + result_calculator().toFixed(2));
 					$('#form_sec').html('<table class="table mt-5"><thead class="thead-dark"><tr><th scope="col">Коэффициент объема памяти /Пк/</th><th scope="col">Уровень кратковременного запоминания</th></tr></thead><tbody><tr><th scope="row">10</th><td>очень высокий</td></tr><tr><th scope="row">8-9</th><td>высокий</td></tr><tr><th scope="row">7</th><td>средний</td></tr><tr><th scope="row">5-6</th><td>низкий</td></tr><tr><th scope="row">4</th><td>очень низкий</td></tr></tbody></table>');
