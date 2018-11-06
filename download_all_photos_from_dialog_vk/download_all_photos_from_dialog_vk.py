@@ -44,7 +44,7 @@ try:
 except:
 	pass
 
-messages_with_attachments = vk.method('messages.getHistoryAttachments', {'peer_id': peer_id, 'media_type': media_type, 'count': 200})
+messages_with_attachments = vk.method('messages.getHistoryAttachments', {'peer_id': peer_id, 'media_type': media_type, 'count': 200, 'v':'5.62'})
 next_from = messages_with_attachments['next_from']
 
 
