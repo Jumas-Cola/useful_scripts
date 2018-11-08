@@ -54,4 +54,4 @@ for media_type in media_types:
 			next_from = messages_with_attachments['next_from']
 		except:
 			next_from = ''
-	send_attachments(attachments, delay)
+	send_attachments(attachments.reverse(), delay)
