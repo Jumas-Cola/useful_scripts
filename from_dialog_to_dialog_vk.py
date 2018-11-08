@@ -1,6 +1,16 @@
 import vk_api
 import time
 
+# отправляет вложения из списка группами по 10
+def send_attachments(attachments, delay):
+	for j in range(0, len(attachments), 10):
+		try:
+			print(','.join(attachments[j : j+10]))
+			vk.method('messages.send', {'peer_id' : send_to_id, 'attachment' : ','.join(attachments[j : j+10])})
+			time.sleep(delay)
+		except:
+			pass
+
 
 login = 'login'
 password = 'password'
@@ -35,22 +45,13 @@ for media_type in media_types:
 		for message_with_attachments in messages_with_attachments['items']:
 			attachment = message_with_attachments['attachment']
 			media = attachment[media_type]
-			attachments.append('{}{}_{}'.format(media_type, media['owner_id'], media['id']))
-			if len(attachments) == 10 :
-				try:
-					vk.method('messages.send', {'peer_id' : send_to_id, 'attachment' : ','.join(attachments)})
-					attachments = []
-					time.sleep(delay)
-				except:
-					pass
-		try:
-			vk.method('messages.send', {'peer_id' : send_to_id, 'attachment' : ','.join(attachments)})
-			attachments = []
-			time.sleep(delay)
-		except:
-			pass
+			try:
+				attachments.append('{}{}_{}_{}'.format(media_type, media['owner_id'], media['id'], media['access_key']))
+			except:
+				attachments.append('{}{}_{}'.format(media_type, media['owner_id'], media['id']))
 		messages_with_attachments = vk.method('messages.getHistoryAttachments', {'peer_id': peer_id, 'media_type': media_type, 'start_from': next_from, 'count': 200})
 		try:
 			next_from = messages_with_attachments['next_from']
 		except:
 			next_from = ''
+	send_attachments(attachments, delay)
