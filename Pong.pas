@@ -94,7 +94,7 @@ brush.Color := clBlack;
 while True do
   begin
     // респаун мячика
-    if (b.x+rp.size_x>WindowWidth) then
+    if (b.x+rp.size_x+b.rad>WindowWidth) then
       begin
         b.x := trunc(WindowWidth/2); 
         b.y := trunc(WindowHeight/2);
@@ -102,7 +102,7 @@ while True do
         b.vel_y := random(rand_y)-trunc(rand_y/2);
         l_goals+=1;
       end
-    else if (b.x-rp.size_x<0) then
+    else if (b.x-rp.size_x-b.rad<0) then
       begin
         b.x := trunc(WindowWidth/2); 
         b.y := trunc(WindowHeight/2);
@@ -147,9 +147,16 @@ while True do
     rp.x := WindowWidth-rp.size_x;
     lp.x := 0;
     SetFontSize(25);
-    DrawTextCentered(0, 0, WindowWidth, trunc(WindowHeight/2),l_goals+':'+r_goals);
+    // отрисовка счёта
+    DrawTextCentered(0, 0, WindowWidth, trunc(WindowHeight/3),l_goals+':'+r_goals);
+    // отрисовка разметки поля
+    Line(trunc(WindowWidth/2), 0, trunc(WindowWidth/2), WindowHeight);
+    DrawCircle(trunc(WindowWidth/2), trunc(WindowHeight/2), trunc(WindowWidth/5));
+    // отрисовка правой ракетки
     FillRectangle(rp.x, rp.y, rp.x+rp.size_x, rp.y+rp.size_y);
+    // отрисовка левой ракетки
     FillRectangle(lp.x, lp.y, lp.x+lp.size_x, lp.y+lp.size_y);
+    // отрисовка мячика
     FillCircle(b.x,b.y,b.rad);
     b.x+=b.vel_x;
     b.y+=b.vel_y;
