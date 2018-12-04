@@ -158,7 +158,7 @@ while True do
     else if l_down then lp.y := lp.y + lp.vel;//Down
     
     auto_play_l(4);// автоматическая игра левой ракетки
-    auto_play_r(8);// автоматическая игра правой ракетки
+    //auto_play_r(8);// автоматическая игра правой ракетки
     
     ClearWindow;
     rp.x := WindowWidth-rp.size_x;
