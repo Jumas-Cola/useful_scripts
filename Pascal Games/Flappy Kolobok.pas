@@ -18,16 +18,16 @@ end;
 
 var
 k: circle; 
-b: block;
 accel:=1;
 score:=0;
 game_speed:=5;
 difficulty:=500;
-interv:=160;
-count_walls:=11;
-resp_dist:integer;
+count_walls:=8;
 rand_range:=20;
-rand_arr:=CreateRandomIntegerArray(count_walls+1,-rand_range,rand_range);
+block_arr:array of block;
+b_size_x:=trunc(WindowWidth/count_walls);
+b_size_y:=180;
+interv:=b_size_x+trunc(b_size_x/count_walls);
 
 
 // обработчик нажатия клавиши
@@ -35,6 +35,17 @@ procedure KeyDown(Key: integer);
 begin 
   if (Key in [32,38,87]) then
     k.vel_y := -8;
+end;
+
+//конструктор записи блока
+function student_block(x,y,size_x,size_y:integer):block;
+var new_block : block;
+begin
+  new_block.x := x; 
+  new_block.y := y;
+  new_block.size_x := size_x;
+  new_block.size_y := size_y;
+  student_block := new_block;
 end;
 
 begin
@@ -45,47 +56,22 @@ k.rad := 15;
 k.x := trunc(WindowWidth/4); 
 k.y := trunc(WindowHeight/2) ;
 
-// инициализация препятствия
-b.size_x := 110;
-b.size_y := 200;
-b.x := WindowWidth-b.size_x; 
-b.y := WindowHeight-b.size_y; 
+//заполнение массива записей блоков
+setlength(block_arr, count_walls);
+for i:integer:=0 to count_walls-1 do
+  if ((i mod 2) <> 0)then
+    block_arr[i]:=student_block(WindowWidth+interv*i, 0, b_size_x, b_size_y)
+  else
+    block_arr[i]:=student_block(WindowWidth+interv*i, WindowHeight-b_size_y, b_size_x, b_size_y);
 
 lockdrawing;
 SetFontSize(20);
 OnKeyDown := KeyDown;
-resp_dist:=-interv*count_walls-b.size_x;
 while True do
   begin    
-    //условия конца игры
+    //условие конца игры
     if (k.y<0) or (k.y>WindowHeight) then
         break;
-    
-    if (k.x in [b.x..b.x+b.size_x]) and (k.y in [b.y+rand_arr[0]..b.y+b.size_y]) then
-        break;
-    if (k.x in [b.x+interv..b.x+b.size_x+interv]) and (k.y in [0..b.size_y+rand_arr[1]]) then
-        break;
-    if (k.x in [b.x+interv*2..b.x+b.size_x+interv*2]) and (k.y in [b.y+rand_arr[2]..b.y+b.size_y]) then
-        break;
-    if (k.x in [b.x+interv*3..b.x+b.size_x+interv*3]) and (k.y in [0..b.size_y+rand_arr[3]]) then
-        break;
-    if (k.x in [b.x+interv*4..b.x+b.size_x+interv*4]) and (k.y in [b.y+rand_arr[4]..b.y+b.size_y]) then
-        break;
-    if (k.x in [b.x+interv*5..b.x+b.size_x+interv*5]) and (k.y in [0..b.size_y+rand_arr[5]]) then
-        break;
-    if (k.x in [b.x+interv*6..b.x+b.size_x+interv*6]) and (k.y in [b.y+rand_arr[6]..b.y+b.size_y]) then
-        break;
-    if (k.x in [b.x+interv*7..b.x+b.size_x+interv*7]) and (k.y in [0..b.size_y+rand_arr[7]]) then
-        break;
-    if (k.x in [b.x+interv*8..b.x+b.size_x+interv*8]) and (k.y in [b.y+rand_arr[8]..b.y+b.size_y]) then
-        break;
-    if (k.x in [b.x+interv*9..b.x+b.size_x+interv*9]) and (k.y in [0..b.size_y+rand_arr[9]]) then
-        break;
-    if (k.x in [b.x+interv*10..b.x+b.size_x+interv*10]) and (k.y in [b.y+rand_arr[10]..b.y+b.size_y]) then
-        break;
-    if (k.x in [b.x+interv*11..b.x+b.size_x+interv*11]) and (k.y in [0..b.size_y+rand_arr[11]]) then
-        break;
-    
            
     ClearWindow;
     
@@ -104,24 +90,26 @@ while True do
     
     // отрисовка препятствия/препятствий
     brush.Color := clBrown;
-    for i:integer:=0 to count_walls do
-      if ((i mod 2) <> 0) and (i<>0) then
-        FillRoundRect(b.x+interv*i, 0, b.x+b.size_x+interv*i, b.size_y+rand_arr[i], 10, 50)
-      else
-        FillRoundRect(b.x+interv*i, b.y+rand_arr[i], b.x+b.size_x+interv*i, b.y+b.size_y, 10, 50);
+    for i:integer:=0 to count_walls-1 do
+      begin
+        block_arr[i].x-=game_speed;
+        //условия конца игры
+        if (k.x >= block_arr[i].x) and (k.x <= block_arr[i].x+block_arr[i].size_x) and (k.y >= block_arr[i].y) and (k.y <= block_arr[i].y+block_arr[i].size_y) then
+          exit;
+        FillRoundRect(block_arr[i].x, block_arr[i].y, block_arr[i].x+block_arr[i].size_x, block_arr[i].y+block_arr[i].size_y, 10, 50);
+        //респаун блоков
+        if (block_arr[i].x+b_size_x)<0 then
+          begin
+            block_arr[i].x:=WindowWidth;
+            block_arr[i].size_y+=random(rand_range)-trunc(rand_range/2);
+            if ((i mod 2) = 0) then
+              block_arr[i].y:=WindowHeight-block_arr[i].size_y;
+          end;
+      end;
     
     // отрисовка счёта
     brush.Color := ARGB(1,0,0,0);
     TextOut(10,10,'Score: '+score);
-    
-    b.x-=game_speed;//обновление координаты препятствий в зависимости от скорости игры
-    
-    //респаун препятствий в конце экрана
-    if (b.x<resp_dist) then
-      begin
-        b.x:=WindowWidth;
-        rand_arr:=CreateRandomIntegerArray(count_walls+1,-rand_range,rand_range);
-      end;
       
     sleep(20);
     redraw;
