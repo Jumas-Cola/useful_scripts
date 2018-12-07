@@ -101,7 +101,7 @@ while True do
         if (block_arr[i].x+b_size_x)<0 then
           begin
             block_arr[i].x:=WindowWidth;
-            block_arr[i].size_y+=random(rand_range)-trunc(rand_range/2);
+            block_arr[i].size_y:=b_size_y+random(rand_range)-trunc(rand_range/2);
             if ((i mod 2) = 0) then
               block_arr[i].y:=WindowHeight-block_arr[i].size_y;
           end;
