@@ -118,7 +118,7 @@ begin
   SetLength(x_arr, snake_len);
   SetLength(y_arr, snake_len);
   SetLength(sq_arr, snake_len);
-  sq_arr[0] := square_init(5, 6);
+  sq_arr[0] := square_init(trunc(n/2), trunc(n/2));
   
   //создание массива записей
   for i: integer := 1 to snake_len - 1 do
