@@ -82,6 +82,7 @@ var start_x:=0;
     y_arr:array of integer;
     apple_x:=-1;
     apple_y:=-1;
+    succes_apple_coords:boolean;
 
 // обработчик нажатия клавиши
 procedure KeyDown(Key: integer);
@@ -194,12 +195,19 @@ begin
       begin
         if (sq_arr[0].x=apple_x) and (sq_arr[0].y=apple_y) then
           snake_len+=1;
-        apple_x:=random(n);
-        apple_y:=random(n);
-        while (apple_x in x_arr) do
-         apple_x:=random(n);
-        while (apple_y in y_arr) do
-         apple_y:=random(n);
+        succes_apple_coords:=false;
+        while not succes_apple_coords do
+          begin
+            apple_x:=random(n);
+            apple_y:=random(n);
+            succes_apple_coords:=true;
+            for i:integer:=0 to x_arr.length-1 do
+              if (apple_x=x_arr[i]) and (apple_y=y_arr[i]) then
+                begin
+                  succes_apple_coords:=false;
+                  break;
+                end;
+          end;
       end;
      f.field[apple_x][apple_y]:=2;
      
