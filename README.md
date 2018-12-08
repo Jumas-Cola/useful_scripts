@@ -8,4 +8,4 @@ Some useful scripts ![Python 3.6](https://pp.userapi.com/c846523/v846523407/b716
 * **melody_maker** - класс для более удобной работы с библиотекой chippy (написания мелодий буквами)
 * **jacobson_memory_test** - тест памяти по методике Джекобсона. Демо:(http://spacetriper.ru/jacobson_memory_test.html)
 * **from_dialog_to_dialog_vk** - скрипт для пересылки вложений из одного диалога в другой
-* **Pong** - простой Понг на PascalABC.NET
+* **Pascal Games** - мини-игры на PascalABC.NET
