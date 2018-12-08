@@ -160,7 +160,7 @@
 		}
 
 		function start(){
-			$('#main_sec').html('<h3 id="dialog_window" class="d-flex justify-content-center mt-5"></h3><section id="form_sec"><form><div class="form-group"><input type="number" class="form-control" id="InputAnswer" placeholder="Ответ"></div><button class="btn btn-primary" onclick="get_answer();return false;" id="InputBtn">Отправить</button></form></section>');
+			$('#main_sec').html('<h3 id="dialog_window" class="d-flex justify-content-center mt-5"></h3><section id="form_sec"><form><div class="form-group"><input type="number" class="form-control" id="InputAnswer" placeholder="Ответ"></div><button class="btn btn-primary" onclick="get_answer();return false;" id="InputBtn" disabled="true">Отправить</button></form></section>');
 			$("#main_sec").removeClass();
 			$('#dialog_window').html('Серия №'+(series_count+1));
 		    setTimeout("$('#dialog_window').html('Внимание! Начинаем!');", 1000);
