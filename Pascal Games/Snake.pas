@@ -97,7 +97,7 @@ begin
     sq_arr[0].dir := 't'
   else if (Key = 40) and (prev_dir <> 't') then
     sq_arr[0].dir := 'b'
-  else if (Key = 37) and (sq_arr[0].dir <> '0') and (prev_dir <> 'r') then
+  else if (Key = 37) and (prev_dir <> '0') and (prev_dir <> 'r') then
     sq_arr[0].dir := 'l'
   else if (Key = 39) and (prev_dir <> 'l') then
     sq_arr[0].dir := 'r';
