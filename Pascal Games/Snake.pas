@@ -88,17 +88,18 @@ var
   apple_x := -1;
   apple_y := -1;
   succes_apple_coords: boolean;
+  prev_dir: char;
 
 // обработчик нажатия клавиши
 procedure KeyDown(Key: integer);
 begin
-  if (Key = 38) and (sq_arr[0].dir <> 'b') then
+  if (Key = 38) and (prev_dir <> 'b') then
     sq_arr[0].dir := 't'
-  else if (Key = 40) and (sq_arr[0].dir <> 't') then
+  else if (Key = 40) and (prev_dir <> 't') then
     sq_arr[0].dir := 'b'
-  else if (Key = 37) and (sq_arr[0].dir <> 'r') and (sq_arr[0].dir <> '0') then
+  else if (Key = 37) and (sq_arr[0].dir <> '0') and (prev_dir <> 'r') then
     sq_arr[0].dir := 'l'
-  else if (Key = 39) and (sq_arr[0].dir <> 'l') then
+  else if (Key = 39) and (prev_dir <> 'l') then
     sq_arr[0].dir := 'r';
 end;
 
@@ -118,7 +119,7 @@ begin
   SetLength(x_arr, snake_len);
   SetLength(y_arr, snake_len);
   SetLength(sq_arr, snake_len);
-  sq_arr[0] := square_init(trunc(n/2), trunc(n/2));
+  sq_arr[0] := square_init(trunc(n / 2), trunc(n / 2));
   
   //создание массива записей
   for i: integer := 1 to snake_len - 1 do
@@ -216,6 +217,9 @@ begin
       end;
     end;
     f.field[apple_x][apple_y] := 2;
+    
+    //переменная для запрета поворота "внутрь себя"
+    prev_dir := sq_arr[0].dir;
     
     f.DrawField(r);
     redraw;
