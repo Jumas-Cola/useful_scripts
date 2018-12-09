@@ -221,6 +221,16 @@ begin
     //переменная для запрета поворота "внутрь себя"
     prev_dir := sq_arr[0].dir;
     
+    //условие победы
+    if snake_len = n * n then
+    begin
+      SetBrushColor(clWhite);
+      SetFontSize(20);
+      DrawTextCentered(0, 0, WindowWidth, WindowHeight, 'YOU WIN!');
+      redraw;
+      exit;
+    end;
+    
     f.DrawField(r);
     redraw;
     sleep(300);
