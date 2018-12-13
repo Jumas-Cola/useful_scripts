@@ -54,6 +54,7 @@ begin
   SetBrushColor(clWhite);
   SetFontSize(20);
   DrawTextCentered(0, 0, WindowWidth, WindowHeight, 'GAME OVER');
+  DrawTextCentered(0, 0, WindowWidth, trunc(WindowHeight*1.2), 'Score: '+score);
   redraw;
 end;
 
