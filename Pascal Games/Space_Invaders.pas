@@ -29,9 +29,9 @@ var
 procedure KeyDown(Key: integer);
 begin
     case Key of 
-        37:  if ship.Center.X > 40 then ship.MoveOn(-vel_x, 0);
-        39:  if ship.Center.X < WindowWidth - 40 then ship.MoveOn(vel_x, 0);
-        32:  if (bullet.Center.Y < 0) then bullet.MoveTo(ship.Center.X - 4, ship.Center.Y - 3);
+        37: if ship.Center.X > 40 then ship.MoveOn(-vel_x, 0);
+        39: if ship.Center.X < WindowWidth - 40 then ship.MoveOn(vel_x, 0);
+        32: if (bullet.Center.Y < 0) then bullet.MoveTo(ship.Center.X - 4, ship.Center.Y - 3);
     end;
 end;
 
@@ -55,31 +55,31 @@ begin
     if rand_arr = 0 then
     begin
         rand_num := random(inv_count - 1);
-        if (inv_bullet.Center.Y > WindowHeight) and (invaders_arr_0[rand_num].Color <> clWhite) then
+        if invaders_arr_0[rand_num].Color <> clWhite then
             inv_bullet.MoveTo(invaders_arr_0[rand_num].Center.X, invaders_arr_0[rand_num].Center.Y);
     end
     else if rand_arr = 1 then
     begin
         rand_num := random(inv_count - 1);
-        if (inv_bullet.Center.Y > WindowHeight) and (invaders_arr_1[rand_num].Color <> clWhite) then
+        if invaders_arr_1[rand_num].Color <> clWhite then
             inv_bullet.MoveTo(invaders_arr_1[rand_num].Center.X, invaders_arr_1[rand_num].Center.Y);
     end
     else if rand_arr = 2 then
     begin
         rand_num := random(inv_count - 1);
-        if (inv_bullet.Center.Y > WindowHeight) and (invaders_arr_2[rand_num].Color <> clWhite) then
+        if invaders_arr_2[rand_num].Color <> clWhite then
             inv_bullet.MoveTo(invaders_arr_2[rand_num].Center.X, invaders_arr_2[rand_num].Center.Y);
     end
     else if rand_arr = 3 then
     begin
         rand_num := random(inv_count - 1);
-        if (inv_bullet.Center.Y > WindowHeight) and (invaders_arr_3[rand_num].Color <> clWhite) then
+        if invaders_arr_3[rand_num].Color <> clWhite then
             inv_bullet.MoveTo(invaders_arr_3[rand_num].Center.X, invaders_arr_3[rand_num].Center.Y);
     end
     else if rand_arr = 4 then
     begin
         rand_num := random(inv_count - 1);
-        if (inv_bullet.Center.Y > WindowHeight) and (invaders_arr_4[rand_num].Color <> clWhite) then
+        if invaders_arr_4[rand_num].Color <> clWhite then
             inv_bullet.MoveTo(invaders_arr_4[rand_num].Center.X, invaders_arr_4[rand_num].Center.Y);
     end;
 end;
@@ -317,7 +317,7 @@ begin
             inv_dir := 1;
         if invaders_arr_0[inv_count - 1].Center.X > WindowWidth - 40 then
             inv_dir := 0;
-        if cycles mod (random(100) + 2) = 0 then
+        if inv_bullet.Center.Y > WindowHeight then
             invaders_bullet;
         if cycles mod 100 = 0 then
             if inv_dir = 1 then
