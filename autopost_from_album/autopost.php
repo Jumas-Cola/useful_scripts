@@ -1,15 +1,6 @@
 <?php
 /*
 Скрипт для автоматического постинга из альбома на стену группы. Запускать через cron
-Если уже есть токен - то вставить его в файл vk_config.json
-Если нет токена - то введите логин и пароль и он будет получен автоматически
-
-clientID = "2274003"                      //VK for Android app client_id
-clientSecret = "hHbZxrka2uZ6jB1inYsH"     //VK for Android app client_secret
-clientID = "3697615"                      //VK for Windows app client_id
-clientSecret = "AlVXZFMUqyrnABp8ncuU"     //VK for Windows app client_secret
-clientID = "3140623"                        //VK for iPhone app client_id
-clientSecret = "VeWdmVclDCtn6ihuP1nt"       //VK for iPhone app client_secret
 */
 
 $config = [
@@ -19,8 +10,6 @@ $config = [
   'message' => '#anime
 
   Источник: pinterest.com', // текст поста
-  'client_id' => 3697615,
-  'client_secret' => 'AlVXZFMUqyrnABp8ncuU',
   'access_token' => '', // токен доступа пользователя
   'offset' => '',
   'v' => '5.92',
@@ -41,8 +30,7 @@ for ($i = 0; $i < 5; $i++) {
           'access_token' => $config['access_token'],
           'v' => $config['v'],
         ];
-        $get_params = http_build_query($request_params);
-        $response = json_decode(file_get_contents('https://api.vk.com/method/photos.get?' . $get_params));
+        $response = vk_method('photos.get', $request_params);
         $oid = $response->response->items[0]->owner_id;
         $count = $response->response->count;
         $media_id = $response->response->items[0]->id;
@@ -56,8 +44,7 @@ for ($i = 0; $i < 5; $i++) {
           'access_token' => $config['access_token'],
           'v' => $config['v'],
         ];
-        $get_params = http_build_query($request_params);
-        $response = json_decode(file_get_contents('https://api.vk.com/method/wall.post?' . $get_params));
+        $response = vk_method('wall.post', $request_params);
         $file_json = json_decode(file_get_contents('vk_config.json'));
         $file_json->offset++; // увеличение отступа на 1
         if ($file_json->offset >= $count) {
@@ -85,4 +72,12 @@ function get_offset($file = 'vk_config.json')
     ]);
     file_put_contents($file, $vk_config_json);
     return json_decode($vk_config_json);
+}
+
+function vk_method($method, $request_params)
+{
+  $get_params = http_build_query($request_params);
+  $url = sprintf('https://api.vk.com/method/%s?%s', $method, $get_params);
+  $response = json_decode(file_get_contents($url));
+  return $response;
 }
