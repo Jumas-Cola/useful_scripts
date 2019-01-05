@@ -1,3 +1,4 @@
+
 Some useful scripts ![Python 3.6](https://pp.userapi.com/c846523/v846523407/b716d/N3RXKWFcPS0.jpg)
 ======
 * **downl_from_group_vk** – скрипт для скачивания файлов со стены
@@ -11,3 +12,4 @@ Some useful scripts ![Python 3.6](https://pp.userapi.com/c846523/v846523407/b716
 * **del_deactivated_friends** - скрипт для удаления из друзей "мёртвых" страниц
 * **autopost_from_album** - скрипт для постинга фотографий из альбома вк
 * **autopost_from_folder** - скрипт для постинга фотографий из папки
+* **check_doubles** - удаление дублей фотографий в папке (абсолютных дублей)
