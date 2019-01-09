@@ -21,7 +21,7 @@ namespace UploadToGroup
             var files = Directory.GetFiles(folderBrowserDialog1.SelectedPath);
             for (int i=0; i < files.Length; i++)
             {
-                for (int j = 0; j <= 10; j++)
+                for (int j = 0; j <= 100; j++)
                 {
                     try
                     {
@@ -35,11 +35,11 @@ namespace UploadToGroup
                             label5.Text = response["error"]["error_msg"].ToString();
                             label5.Refresh();
                         }
-                        if (j == 10)
+                        if (j == 100)
                         {
                             Application.Exit();
                         }
-                        System.Threading.Thread.Sleep(j * 300);
+                        System.Threading.Thread.Sleep(j * 50);
                     }
                     catch (Exception ex)
                     {
