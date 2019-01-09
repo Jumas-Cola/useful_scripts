@@ -18,27 +18,37 @@ namespace UploadToGroup
         private void button1_Click(object sender, EventArgs e)
         {
             var vk = new VK_API();
-            try
+            var files = Directory.GetFiles(folderBrowserDialog1.SelectedPath);
+            for (int i=0; i < files.Length; i++)
             {
-                var files = Directory.GetFiles(folderBrowserDialog1.SelectedPath);
-                for (int i=0; i < files.Length; i++)
+                for (int j = 0; j <= 10; j++)
                 {
-                    for (int j = 0; j < 10; j++)
+                    try
                     {
-                        var responce = vk.Upload(textBox2.Text, textBox3.Text, textBox1.Text, files[i]);
-                        if (responce["response"].ToString() != null)
+                        var response = vk.Upload(textBox2.Text, textBox3.Text, textBox1.Text, files[i]);
+                        if (response["response"].ToString() != null)
                         {
                             break;
                         }
-                        System.Threading.Thread.Sleep(j*300);
+                        else if (response["error"].ToString() != null)
+                        {
+                            label5.Text = response["error"]["error_msg"].ToString();
+                            label5.Refresh();
+                        }
+                        if (j == 10)
+                        {
+                            Application.Exit();
+                        }
+                        System.Threading.Thread.Sleep(j * 300);
                     }
-                    label5.Text = "Загружено: "+ i.ToString()+" / "+ files.Length.ToString();
-                    label5.Refresh();
+                    catch (Exception ex)
+                    {
+                        label5.Text = ex.ToString();
+                        label5.Refresh();
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                label5.Text = ex.ToString();
+                label5.Text = "Загружено: "+ i.ToString()+" / "+ files.Length.ToString();
+                label5.Refresh();
             }
             label5.Text = "Готово!";
         }
