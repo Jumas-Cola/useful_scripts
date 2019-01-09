@@ -47,6 +47,10 @@ namespace UploadToGroup
                         label5.Refresh();
                     }
                 }
+                if (checkBox1.Checked)
+                {
+                    File.Delete(files[i]);
+                }
                 label5.Text = "Загружено: "+ i.ToString()+" / "+ files.Length.ToString();
                 label5.Refresh();
             }
