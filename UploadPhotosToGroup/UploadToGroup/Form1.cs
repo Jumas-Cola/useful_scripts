@@ -23,7 +23,15 @@ namespace UploadToGroup
                 var files = Directory.GetFiles(folderBrowserDialog1.SelectedPath);
                 for (int i=0; i < files.Length; i++)
                 {
-                    vk.Upload(textBox2.Text, textBox3.Text, textBox1.Text, files[i]);
+                    for (int j = 0; j < 10; j++)
+                    {
+                        var responce = vk.Upload(textBox2.Text, textBox3.Text, textBox1.Text, files[i]);
+                        if (responce["response"].ToString() != null)
+                        {
+                            break;
+                        }
+                        System.Threading.Thread.Sleep(j*300);
+                    }
                     label5.Text = "Загружено: "+ i.ToString()+" / "+ files.Length.ToString();
                     label5.Refresh();
                 }
@@ -49,7 +57,7 @@ namespace UploadToGroup
         string v = "5.92";
 
         //осуществляет вызов метода vk api
-        public string Upload(string groupid, string albumid, string token, string imagePath)
+        public JObject Upload(string groupid, string albumid, string token, string imagePath)
         {
             var c = new WebClient();
             //
@@ -72,7 +80,7 @@ namespace UploadToGroup
                      + "&aid=" + j2["aid"]
                      + "&hash=" + j2["hash"];
             var res = c.DownloadString(u3);
-            return res;
+            return JsonConvert.DeserializeObject(res) as JObject;
         }
     }
 }

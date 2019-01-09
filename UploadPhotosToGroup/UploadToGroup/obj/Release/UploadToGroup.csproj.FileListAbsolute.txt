@@ -11,3 +11,17 @@ C:\Users\Х\source\repos\UploadToGroup\UploadToGroup\obj\Release\UploadToGroup.c
 C:\Users\Х\source\repos\UploadToGroup\UploadToGroup\obj\Release\UploadToGroup.csproj.CopyComplete
 C:\Users\Х\source\repos\UploadToGroup\UploadToGroup\obj\Release\UploadToGroup.exe
 C:\Users\Х\source\repos\UploadToGroup\UploadToGroup\obj\Release\UploadToGroup.pdb
+C:\useful_scripts\UploadPhotosToGroup\UploadToGroup\bin\Release\UploadToGroup.exe.config
+C:\useful_scripts\UploadPhotosToGroup\UploadToGroup\bin\Release\UploadToGroup.exe
+C:\useful_scripts\UploadPhotosToGroup\UploadToGroup\bin\Release\UploadToGroup.pdb
+C:\useful_scripts\UploadPhotosToGroup\UploadToGroup\bin\Release\Newtonsoft.Json.dll
+C:\useful_scripts\UploadPhotosToGroup\UploadToGroup\bin\Release\Newtonsoft.Json.pdb
+C:\useful_scripts\UploadPhotosToGroup\UploadToGroup\bin\Release\Newtonsoft.Json.xml
+C:\useful_scripts\UploadPhotosToGroup\UploadToGroup\obj\Release\UploadToGroup.csprojAssemblyReference.cache
+C:\useful_scripts\UploadPhotosToGroup\UploadToGroup\obj\Release\UploadToGroup.Form1.resources
+C:\useful_scripts\UploadPhotosToGroup\UploadToGroup\obj\Release\UploadToGroup.Properties.Resources.resources
+C:\useful_scripts\UploadPhotosToGroup\UploadToGroup\obj\Release\UploadToGroup.csproj.GenerateResource.cache
+C:\useful_scripts\UploadPhotosToGroup\UploadToGroup\obj\Release\UploadToGroup.csproj.CoreCompileInputs.cache
+C:\useful_scripts\UploadPhotosToGroup\UploadToGroup\obj\Release\UploadToGroup.csproj.CopyComplete
+C:\useful_scripts\UploadPhotosToGroup\UploadToGroup\obj\Release\UploadToGroup.exe
+C:\useful_scripts\UploadPhotosToGroup\UploadToGroup\obj\Release\UploadToGroup.pdb
