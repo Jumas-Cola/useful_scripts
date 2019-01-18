@@ -45,12 +45,14 @@ for ($i = 0; $i < 5; $i++) {
           'v' => $config['v'],
         ];
         $response = vk_method('wall.post', $request_params);
-        $file_json = json_decode(file_get_contents('vk_config.json'));
-        $file_json->offset++; // увеличение отступа на 1
-        if ($file_json->offset >= $count) {
-          $file_json->offset = 0;
+
+        // запись отступа в файл
+        $vk_config_json->offset++; // увеличение отступа на 1
+        if ($vk_config_json->offset >= $count) {
+          $vk_config_json->offset = 0;
         }
-        file_put_contents('vk_config.json', json_encode($file_json));
+        file_put_contents('vk_config.json', json_encode($vk_config_json));
+
         break;
     } catch (Exception $e) {
         echo $e->getMessage();
@@ -62,15 +64,14 @@ for ($i = 0; $i < 5; $i++) {
 function get_offset($file = 'vk_config.json')
 {
     if (is_file($file) && file_get_contents($file)) {
-        $file_json = json_decode(file_get_contents($file));
-        $offset = $file_json->offset;
+        $vk_config_json = file_get_contents($file);
     } else {
         $offset = 0;
+        $vk_config_json = json_encode([
+          'offset' => $offset,
+        ]);
+        file_put_contents($file, $vk_config_json);
     }
-    $vk_config_json = json_encode([
-      'offset' => $offset,
-    ]);
-    file_put_contents($file, $vk_config_json);
     return json_decode($vk_config_json);
 }
 
