@@ -4,7 +4,6 @@ Some useful scripts ![Python 3.6](https://pp.userapi.com/c846523/v846523407/b716
 * **downl_from_group_vk** – скрипт для скачивания файлов со стены (vk.com)
 * **download_all_photos_from_dialog_vk** - скрипт для скачивания всех фотографий из диалога (vk.com)
 * **transfer_saved_photos_and_videos_vk** - скрипт для копирования фото и видео из одного аккаунта на другой (vk.com)
-* **VK_API.cs** - C# класс для более удобного доступа к методам vk api (vk.com)
 * **word_accent** - скрипт для автоматической постановки ударения в словах
 * **melody_maker** - класс для более удобной работы с библиотекой chippy (написания мелодий буквами)
 * **jacobson_memory_test** - тест памяти по методике Джекобсона. Демо:(http://spacetriper.ru/jacobson_memory_test.html)
@@ -16,3 +15,5 @@ Some useful scripts ![Python 3.6](https://pp.userapi.com/c846523/v846523407/b716
 * **upload_to_album** - загрузить фотографии в альбом пользователя или группы из папки (vk.com)
 * **UploadPhotosToGroup** - программа для загрузки изображений из папки в группу (vk.com)
 * **upload_to_album_from album** - скрипт для перемещения фотографий из одного альбома в другой (vk.com)
+* **CreateDelayedPosts** - программа для создания отложенных постов (vk.com)
+* **downl_from_devianart** - скрипт для скачивания библиотек изображений с devianart.com
