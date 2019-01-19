@@ -38,8 +38,13 @@ namespace UploadToGroup
                             photo_obj = String.Format("photo{0}_{1}",
                                 response["response"][0]["owner_id"].ToString(),
                                 response["response"][0]["id"].ToString());
-                            if (textBox2.Text != "") {
+                            if (textBox2.Text != "")
+                            {
                                 owner_id = "-" + textBox2.Text;
+                            }
+                            else
+                            {
+                                owner_id = response["response"][0]["owner_id"].ToString();
                             }
                             Dictionary<string, string> parameters = new Dictionary<string, string>
                             {
