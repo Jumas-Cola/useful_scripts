@@ -24,7 +24,7 @@ namespace UploadToGroup
             var date = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
             JObject response;
             string photo_obj;
-            string owner_id = "";
+            string owner_id;
 
             for (int i=0; i < files.Length; i++)
             {
@@ -46,6 +46,7 @@ namespace UploadToGroup
                             {
                                 owner_id = response["response"][0]["owner_id"].ToString();
                             }
+                            date += 60 * Convert.ToInt32(comboBox1.Text);
                             Dictionary<string, string> parameters = new Dictionary<string, string>
                             {
                                 {"owner_id" , owner_id},
@@ -56,19 +57,18 @@ namespace UploadToGroup
                                 {"publish_date" , date.ToString()}
                             };
                             vk.Method("wall.post", parameters);
-                            date += 60 * Convert.ToInt32(comboBox1.Text);
                             break;
                         }
                         if (j == 100)
                         {
                             Application.Exit();
                         }
-                        System.Threading.Thread.Sleep(j * 50);
                     }
                     catch (Exception ex)
                     {
                         label5.Text = ex.ToString();
                         label5.Refresh();
+                        System.Threading.Thread.Sleep(j * 50);
                     }
                 }
                 if (checkBox1.Checked)
