@@ -1,0 +1,14 @@
+C:\Users\Х\Desktop\CreateDelayedPosts\CreateDelayedPosts\bin\Release\CreateDelayedPosts.exe.config
+C:\Users\Х\Desktop\CreateDelayedPosts\CreateDelayedPosts\bin\Release\CreateDelayedPosts.exe
+C:\Users\Х\Desktop\CreateDelayedPosts\CreateDelayedPosts\bin\Release\CreateDelayedPosts.pdb
+C:\Users\Х\Desktop\CreateDelayedPosts\CreateDelayedPosts\bin\Release\Newtonsoft.Json.dll
+C:\Users\Х\Desktop\CreateDelayedPosts\CreateDelayedPosts\bin\Release\Newtonsoft.Json.pdb
+C:\Users\Х\Desktop\CreateDelayedPosts\CreateDelayedPosts\bin\Release\Newtonsoft.Json.xml
+C:\Users\Х\Desktop\CreateDelayedPosts\CreateDelayedPosts\obj\Release\CreateDelayedPosts.csprojAssemblyReference.cache
+C:\Users\Х\Desktop\CreateDelayedPosts\CreateDelayedPosts\obj\Release\UploadToGroup.Form1.resources
+C:\Users\Х\Desktop\CreateDelayedPosts\CreateDelayedPosts\obj\Release\CreateDelayedPosts.Properties.Resources.resources
+C:\Users\Х\Desktop\CreateDelayedPosts\CreateDelayedPosts\obj\Release\CreateDelayedPosts.csproj.GenerateResource.cache
+C:\Users\Х\Desktop\CreateDelayedPosts\CreateDelayedPosts\obj\Release\CreateDelayedPosts.csproj.CoreCompileInputs.cache
+C:\Users\Х\Desktop\CreateDelayedPosts\CreateDelayedPosts\obj\Release\CreateDelayedPosts.csproj.CopyComplete
+C:\Users\Х\Desktop\CreateDelayedPosts\CreateDelayedPosts\obj\Release\CreateDelayedPosts.exe
+C:\Users\Х\Desktop\CreateDelayedPosts\CreateDelayedPosts\obj\Release\CreateDelayedPosts.pdb
