@@ -44,7 +44,7 @@ namespace UploadToGroup
                             Dictionary<string, string> parameters = new Dictionary<string, string>
                             {
                                 {"owner_id" , owner_id},
-                                {"message" , textBox3.Text+"Hello"},
+                                {"message" , textBox3.Text},
                                 {"attachments" , photo_obj},
                                 {"from_group" , "1"},
                                 {"signed" , "0"},
