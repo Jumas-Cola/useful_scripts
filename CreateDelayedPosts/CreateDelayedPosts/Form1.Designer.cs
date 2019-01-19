@@ -52,7 +52,6 @@
             this.label1.Size = new System.Drawing.Size(84, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Введите токен:";
-            this.label1.UseWaitCursor = true;
             // 
             // textBox1
             // 
@@ -60,7 +59,6 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(327, 20);
             this.textBox1.TabIndex = 1;
-            this.textBox1.UseWaitCursor = true;
             // 
             // label2
             // 
@@ -70,7 +68,6 @@
             this.label2.Size = new System.Drawing.Size(169, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "Введите id группы (без минуса):";
-            this.label2.UseWaitCursor = true;
             // 
             // textBox2
             // 
@@ -78,7 +75,6 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(327, 20);
             this.textBox2.TabIndex = 3;
-            this.textBox2.UseWaitCursor = true;
             // 
             // button1
             // 
@@ -88,7 +84,6 @@
             this.button1.TabIndex = 8;
             this.button1.Text = "Загрузить";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.UseWaitCursor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label5
@@ -108,7 +103,6 @@
             this.button2.TabIndex = 10;
             this.button2.Text = "Выбрать папку";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.UseWaitCursor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label4
@@ -129,7 +123,6 @@
             this.checkBox1.TabIndex = 12;
             this.checkBox1.Text = "Удалять фото после загрузки";
             this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.UseWaitCursor = true;
             // 
             // comboBox1
             // 
@@ -148,7 +141,6 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(148, 21);
             this.comboBox1.TabIndex = 13;
-            this.comboBox1.UseWaitCursor = true;
             // 
             // textBox3
             // 
@@ -157,7 +149,6 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(327, 41);
             this.textBox3.TabIndex = 14;
-            this.textBox3.UseWaitCursor = true;
             // 
             // label3
             // 
@@ -167,7 +158,6 @@
             this.label3.Size = new System.Drawing.Size(72, 13);
             this.label3.TabIndex = 15;
             this.label3.Text = "Текст поста:";
-            this.label3.UseWaitCursor = true;
             // 
             // label6
             // 
@@ -177,7 +167,6 @@
             this.label6.Size = new System.Drawing.Size(114, 13);
             this.label6.TabIndex = 16;
             this.label6.Text = "Задержка в минутах:";
-            this.label6.UseWaitCursor = true;
             // 
             // Form1
             // 
