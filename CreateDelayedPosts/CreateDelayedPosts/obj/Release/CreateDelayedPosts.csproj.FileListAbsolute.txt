@@ -4,7 +4,6 @@ C:\useful_scripts\CreateDelayedPosts\CreateDelayedPosts\bin\Release\CreateDelaye
 C:\useful_scripts\CreateDelayedPosts\CreateDelayedPosts\bin\Release\Newtonsoft.Json.dll
 C:\useful_scripts\CreateDelayedPosts\CreateDelayedPosts\bin\Release\Newtonsoft.Json.pdb
 C:\useful_scripts\CreateDelayedPosts\CreateDelayedPosts\bin\Release\Newtonsoft.Json.xml
-C:\useful_scripts\CreateDelayedPosts\CreateDelayedPosts\obj\Release\CreateDelayedPosts.csprojAssemblyReference.cache
 C:\useful_scripts\CreateDelayedPosts\CreateDelayedPosts\obj\Release\UploadToGroup.Form1.resources
 C:\useful_scripts\CreateDelayedPosts\CreateDelayedPosts\obj\Release\CreateDelayedPosts.Properties.Resources.resources
 C:\useful_scripts\CreateDelayedPosts\CreateDelayedPosts\obj\Release\CreateDelayedPosts.csproj.GenerateResource.cache

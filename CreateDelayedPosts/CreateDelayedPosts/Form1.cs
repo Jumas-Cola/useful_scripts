@@ -59,11 +59,6 @@ namespace UploadToGroup
                             date += 60 * Convert.ToInt32(comboBox1.Text);
                             break;
                         }
-                        else if (response["error"].ToString() != null)
-                        {
-                            label5.Text = response["error"]["error_msg"].ToString();
-                            label5.Refresh();
-                        }
                         if (j == 100)
                         {
                             Application.Exit();
@@ -114,26 +109,22 @@ namespace UploadToGroup
         {
             var c = new WebClient();
             var u = "https://api.vk.com/method/photos.getWallUploadServer?"
-                    + "group_id" + group_id
+                    + "group_id=" + group_id
                     + "&access_token=" + token
                     + "&v=" + v;
             var r = c.DownloadString(u);
-            Console.WriteLine(r);
             var j = JsonConvert.DeserializeObject(r) as JObject;
-            //
             var u2 = j["response"]["upload_url"].ToString();
             var r2 = Encoding.UTF8.GetString(c.UploadFile(u2, "POST", imagePath));
-            Console.WriteLine(r2);
             var j2 = JsonConvert.DeserializeObject(r2) as JObject;
-            //
             var u3 = "https://api.vk.com/method/photos.saveWallPhoto?"
+                     + "group_id=" + group_id
                      + "&server=" + j2["server"]
                      + "&photo=" + j2["photo"]
                      + "&hash=" + j2["hash"]
                      + "&access_token=" + token
                      + "&v=" + v;
             var res = c.DownloadString(u3);
-            Console.WriteLine(res);
             return JsonConvert.DeserializeObject(res) as JObject;
         }
 
@@ -147,9 +138,7 @@ namespace UploadToGroup
                 string.Join("&", 
                     parameters.Select(kvp => 
                         string.Format("{0}={1}", kvp.Key, kvp.Value))));
-            Console.WriteLine(url);
             var res = c.DownloadString(url);
-            Console.WriteLine(res);
             return JsonConvert.DeserializeObject(res) as JObject;
         }
     }

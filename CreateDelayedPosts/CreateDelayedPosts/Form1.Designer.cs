@@ -93,7 +93,6 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(0, 13);
             this.label5.TabIndex = 9;
-            this.label5.UseWaitCursor = true;
             // 
             // button2
             // 
@@ -112,7 +111,6 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(0, 13);
             this.label4.TabIndex = 11;
-            this.label4.UseWaitCursor = true;
             // 
             // checkBox1
             // 
