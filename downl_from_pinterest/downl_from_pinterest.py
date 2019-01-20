@@ -56,3 +56,5 @@ with open(link_file_name, 'r') as f:
         urlretrieve(place_img, dir_name + '/' + place_img.split('/')[-1])
 browser.quit()
 time.sleep(5)
+print("\n--------------------------------------------------")
+print("\nFinished!")
