@@ -1,6 +1,19 @@
 """
     Скрипт для скачивания пинов с pinterest
     Для работы нужен geckodriver.exe
+
+    ↓↓↓ JS скрипт для скачивания ссылок на изображения с доски
+        (пролистать до низа страницы, а потом запускать) ↓↓↓
+
+    var items = document.querySelectorAll("a.torpedo-thumb-link");
+    var text = ""
+    for (i = 0; i < items.length; i++) {
+        text += items[i].getAttribute("href")+"\n";
+    }
+    var a = document.createElement("a");
+    a.setAttribute("href", "data:text/plain;charset=utf-8," + text);
+    a.setAttribute("download", "link_list.txt");
+    a.click();
 """
 
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
@@ -23,8 +36,8 @@ def init_driver(path=r'C:\Program Files (x86)\Mozilla Firefox\firefox.exe'):
     return driver
 
 
-link_file_name = 'list.txt' # список ссылок на пины
-dir_name = 'photos' # имя папки для сохранения
+link_file_name = 'link_list.txt'  # список ссылок на пины
+dir_name = 'photos'  # имя папки для сохранения
 
 
 browser = init_driver()
