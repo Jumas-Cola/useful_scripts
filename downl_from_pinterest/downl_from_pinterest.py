@@ -5,10 +5,10 @@
     ↓↓↓ JS скрипт для скачивания ссылок на изображения с доски
         (пролистать до низа страницы, а потом запускать) ↓↓↓
 
-    var items = document.querySelectorAll("a.torpedo-thumb-link");
+    var items = document.querySelectorAll("._4f._h._xu._4q > a");
     var text = ""
     for (i = 0; i < items.length; i++) {
-        text += items[i].getAttribute("href")+"\n";
+        text += "https://www.pinterest.ru"+items[i].getAttribute("href")+"\n";
     }
     var a = document.createElement("a");
     a.setAttribute("href", "data:text/plain;charset=utf-8," + text);
