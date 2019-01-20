@@ -3,9 +3,9 @@
     Для работы нужен geckodriver.exe
 
     ↓↓↓ JS скрипт для скачивания ссылок на изображения с доски
-        (пролистать до низа страницы, а потом запускать) ↓↓↓
+        (пролистать до низа страницы, уменьшив масштаб, а потом запускать) ↓↓↓
 
-    var items = document.querySelectorAll("._4f._h._xu._4q > a");
+    var items = document.querySelectorAll("div._4h._h._xx._4s > a");
     var text = ""
     for (i = 0; i < items.length; i++) {
         text += "https://www.pinterest.ru"+items[i].getAttribute("href")+"\n";
@@ -50,8 +50,9 @@ with open(link_file_name, 'r') as f:
         browser.get(string)  # Загружаем страницу
         time.sleep(5)
         place_block = browser.find_element_by_css_selector(
-            "div._ub._49._4f._uc._2v > img")
+            "div._2y._h._xx._4s > div > div > a > div > div > div > div > img")
         place_img = place_block.get_attribute('src')
+        print(place_img)
         urlretrieve(place_img, dir_name + '/' + place_img.split('/')[-1])
 browser.quit()
 time.sleep(5)
