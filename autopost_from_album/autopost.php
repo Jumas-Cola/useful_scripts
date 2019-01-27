@@ -49,9 +49,11 @@ for ($i = 0; $i < 5; $i++) {
         // запись отступа в файл
         $vk_config_json->offset++; // увеличение отступа на 1
         if ($vk_config_json->offset >= $count) {
-          $vk_config_json->offset = 0;
+            $vk_config_json->offset = 0;
         }
-        file_put_contents('vk_config.json', json_encode($vk_config_json));
+        if ($vk_config_json) {
+            file_put_contents('vk_config.json', json_encode($vk_config_json));
+        }
 
         break;
     } catch (Exception $e) {
@@ -63,7 +65,7 @@ for ($i = 0; $i < 5; $i++) {
 
 function get_offset($file = 'vk_config.json')
 {
-    if (is_file($file) && file_get_contents($file)) {
+    if (is_file($file)) {
         $vk_config_json = file_get_contents($file);
     } else {
         $offset = 0;
@@ -77,8 +79,8 @@ function get_offset($file = 'vk_config.json')
 
 function vk_method($method, $request_params)
 {
-  $get_params = http_build_query($request_params);
-  $url = sprintf('https://api.vk.com/method/%s?%s', $method, $get_params);
-  $response = json_decode(file_get_contents($url));
-  return $response;
+    $get_params = http_build_query($request_params);
+    $url = sprintf('https://api.vk.com/method/%s?%s', $method, $get_params);
+    $response = json_decode(file_get_contents($url));
+    return $response;
 }
