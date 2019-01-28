@@ -31,7 +31,7 @@ $id = $response->response->items[0]->id;
 $attachments = sprintf('photo%s_%s', $owner_id, $id);
 $response = vk_method('wall.post', [
   'owner_id' => $config['groups'][array_rand($config['groups'])],
-  'from_group' => 1,
+  'from_group' => 0,
   'message' => $config['message'],
   'attachments' => $attachments,
 ]);
