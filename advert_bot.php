@@ -2,18 +2,14 @@
 /*
 Скрипт для автоматического постинга рекламных постов. Запускать через cron
 */
-$pr_list = [
-  'club161158169',
-  'club129331704',
-]; // объекты пиара
-$rand_pr = $pr_list[array_rand($pr_list)];
 $config = [
   'album_owner' => 456490164, // id владельца альбома с картинками
   'album_id' => 254187932, // id альбома с картинками
-  'message' => "❤ Эта аниме группа была создана с целью восполнить вашу нехватку няшности. Внимание! возможны приступы умиления и привыкание, смотрите на свой страх и риск:3❤
-                ❤ @{$rand_pr}(Лучшие арты) ❤
-                ❤ @{$rand_pr}(Этти) ❤
-                ❤ @{$rand_pr}(Няшки) ❤", // текст поста
+  'message' => "@id456490164(Добавляйся в друзья!)", // текст поста
+  'groups' => [ // группы, где пиарить
+    -161158169,
+    -129331704,
+  ],
   'access_token' => '', // токен доступа пользователя
   'v' => '5.92',
 ];
@@ -34,6 +30,8 @@ $owner_id = $response->response->items[0]->owner_id;
 $id = $response->response->items[0]->id;
 $attachments = sprintf('photo%s_%s', $owner_id, $id);
 $response = vk_method('wall.post', [
+  'owner_id' => $config['groups'][array_rand($config['groups'])],
+  'from_group' => 1,
   'message' => $config['message'],
   'attachments' => $attachments,
 ]);
