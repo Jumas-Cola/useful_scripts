@@ -33,7 +33,7 @@ config = {
     'v': '5.92',
 }
 
-assignment() if len(sys.argv) == 3 else exit(
+assignment() if len(sys.argv) == 4 else exit(
     print('Usage: downl_from_group_vk.py <owner_id> <album_id> <access_token>'))
 
 path = f'{config["owner_id"]}_{config["album_id"]}'
