@@ -1,128 +1,54 @@
-from urllib.parse import urlparse
-from copy import copy
+"""
+    Скрипт для выкачивания изображений из альбома (в т.ч. со стены сообщества) (vk.com)
+    Usage: downl_from_group_vk.py <owner_id> <album_id> <access_token>
+"""
+
 import urllib.request
-import inspect
-import random
+from multiprocessing import Pool
 import vk_api
-import time
-import sys
 import os
+import sys
 
 
-def get_script_dir(follow_symlinks=True):
-    if getattr(sys, 'frozen', False): # py2exe, PyInstaller, cx_Freeze
-        path = os.path.abspath(sys.executable)
-    else:
-        path = inspect.getabsfile(get_script_dir)
-    if follow_symlinks:
-        path = os.path.realpath(path)
-    return os.path.dirname(path)
-
-def file_write(string, file_name=get_script_dir()+"/"+'files_vk.txt'):
-	f = open(file_name,'a')
-	f.write(str(string))
-	f.write("\n")
-	f.close()
-
-def downloader(url, num, file, downl_try_count):
-	downl_try = 0
-	while downl_try != downl_try_count:
-		try:
-			urllib.request.urlretrieve(url, "{}/{}/{}".format(get_script_dir(),str(num),file))
-			break
-		except:
-			downl_try+=1
-	if downl_try == downl_try_count:
-		print("Download failed")
-		file_write("Download failed")
-
-if len(sys.argv) <3:
-	print("--------------------------------------------------\n")
-	print("Usage: downl_from_group_vk.py <login> <password> <owner> <count> <offset> <-sep> <-nd>\n")
-	sys.exit(1)
+def download(url):
+    file = url.split('/')[-1]
+    return urllib.request.urlretrieve(url, f'{path}/{file}')
 
 
-try:
-	login = sys.argv[1]
-	password = sys.argv[2]
-except:
-	sys.exit(1)
-try:
-	owner = sys.argv[3]
-except:
-	owner = ''
-try:
-	count = int(sys.argv[4])
-except:
-	count = 1
-try:
-	offset = int(sys.argv[5])
-except:
-	offset = 0
-try:
-	if sys.argv[6]=='-sep':
-		separate = True
-except:
-	separate = False
-try:
-	if sys.argv[7]=='-nd':
-		download = False
-except:
-	download = True
+def get_photos(offset):
+    return vk.method('photos.get', {'owner_id': config['owner_id'], 'album_id': config['album_id'],
+                                    'rev': 0, 'offset': offset, 'count': config['count'], })['items']
 
 
-downl_try_count = 50
+def assignment():
+    config['owner_id'], config['album_id'], config['access_token'] = sys.argv[1], sys.argv[2], sys.argv[3]
 
 
-print("--------------------------------------------------\n")
-print("Owner: {}\n".format(owner))
-print("Count of 100-s: {}\n".format(str(count)))
-print("Offset: {}\n".format(str(offset)))
-print("Separate to folders: {}\n".format(str(separate)))
-print("Need to download: {}\n".format(str(download)))
+config = {
+    'owner_id': '',
+    'album_id': '',
+    'count': 1000,
+    'processes': 10,
+    'access_token': '',
+    'v': '5.92',
+}
 
+assignment() if len(sys.argv) == 3 else exit(
+    print('Usage: downl_from_group_vk.py <owner_id> <album_id> <access_token>'))
 
-vk = vk_api.VkApi(login=login, password=password)
-vk.auth()
-photo_sizes = ['photo_2560', 'photo_1280', 'photo_807', 'photo_604', 'photo_130', 'photo_75']
-num = 0
+path = f'{config["owner_id"]}_{config["album_id"]}'
 
-for i in range(count):
-	posts = vk.method('wall.get', {'owner_id': owner, 'count': 100, 'filter': 'owner', 'offset': offset, 'v': '5.60'})['items']
-	for post in posts:
-		if 'attachments' in post:
-			for attachment in post['attachments']:
-				if attachment['type'] == 'photo':
-					photo = attachment['photo']
-					for size in photo_sizes:
-						if size in photo:
-							url = photo[size]
-							file = urlparse(photo[size])[2].split('/')[-1]
-							try:
-								os.makedirs(get_script_dir()+"/"+str(num))
-							except:
-								pass
-							print(url)
-							file_write(str(num)+"\t"+url)
-							if download:
-								downloader(url, num, file, downl_try_count)
-							break
-				if attachment['type'] == 'doc':
-					doc = attachment['doc']
-					url = doc['url']
-					file = doc['title']
-					try:
-						os.makedirs(get_script_dir()+"/"+str(num))
-					except:
-						pass
-					print(url)
-					file_write(str(num)+"\t"+url)
-					if download:
-						downloader(url, num, file, downl_try_count)
-
-		if separate:
-			num += 1
-	time.sleep(1)
-	offset+=100
-print("--------------------------------------------------\n")
-print("Finished!\n")
+if __name__ == '__main__':
+    offset = 0
+    if not os.path.exists(path):
+        os.mkdir(path)
+    vk = vk_api.VkApi(token=config['access_token'])
+    photos = get_photos(offset)
+    while photos:
+        url_list = [photo['sizes'][-1]['url'] for photo in photos]
+        with open(f'{path}/url_list.txt', 'a') as f:
+            [f.write(url + '\n') for url in url_list]
+        with Pool(config['processes']) as p:
+            p.map(download, url_list)
+        offset += config['count']
+        photos = get_photos(offset)
