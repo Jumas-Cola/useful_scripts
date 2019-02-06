@@ -12,7 +12,7 @@ $vk = new vk($config);
 $response = $vk->method('messages.getConversations');
 foreach ($response['response']['items'] as $item) {
     $local_id = $item['conversation']['peer']['local_id'];
-    if (!in_array($local_id, $vk->exceptions)) {
+    if (!in_array($local_id, $config['exceptions'])) {
         $vk->method('messages.removeChatUser', [
           'chat_id' => $local_id,
           'member_id' => $vk->id,
@@ -30,7 +30,6 @@ class vk
     {
         $this->access_token = $config['access_token'];
         $this->v = $config['v'];
-        $this->exceptions = $config['exceptions'];
         $this->id = $this->method('users.get')['response'][0]['id'];
     }
 
