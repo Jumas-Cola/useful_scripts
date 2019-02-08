@@ -48,7 +48,7 @@ for ($i = 0; $i < 5; $i++) {
 
         // запись отступа в файл
         $vk_config_json->offset++; // увеличение отступа на 1
-        if ($vk_config_json->offset >= $count) {
+        if ($count && ($vk_config_json->offset >= $count)) {
             $vk_config_json->offset = 0;
         }
         if ($vk_config_json) {
