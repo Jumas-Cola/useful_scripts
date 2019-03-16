@@ -30,6 +30,7 @@ switch ($data->type) {
 
     case 'wall_reply_new':
         if (rand(1, 100) >= $COMMENT_CHANCE) {
+            $vk->sendOK();
             break;
         }
         $reply_to_comment = $data->object->id;
@@ -37,6 +38,7 @@ switch ($data->type) {
         $owner_id = $data->object->owner_id;
         $from_id = $data->object->from_id;
         if ($from_id == $owner_id) {
+            $vk->sendOK();
             break;
         }
         $texts = file($TEXT_FILE);
@@ -53,6 +55,7 @@ switch ($data->type) {
     case 'wall_post_new':
         $marked_as_ads = $data->object->marked_as_ads;
         if ($marked_as_ads) {
+            $vk->sendOK();
             break;
         }
         $post_id = $data->object->id;
