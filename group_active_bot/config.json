@@ -1,0 +1,9 @@
+{
+  "GROUP_TOKEN": "",
+  "CONFIRMATION_TOKEN": "",
+  "SECRET_KEY": "",
+  "TEXT_FILE": "answers.txt",
+  "FIRST_COMMENTS": "first_comments.txt",
+  "COMMENT_CHANCE": 30,
+  "V": "5.80"
+}
