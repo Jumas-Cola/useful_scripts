@@ -1,7 +1,7 @@
 <?php
 
 $config = array(
-  'token' => '9393f5bf4457cf5f26ce8bb05bce75d8aa2de95454c9ff590133f7082c9c8b40e99a3e55923ac3dcff5bb',
+  'token' => '',
   'v' => '5.73',
   'text' => ' %s %s Принимаю всеееееех в друзья! %s %s
     %s %s У меня неееееет подписчиков! %s %s
