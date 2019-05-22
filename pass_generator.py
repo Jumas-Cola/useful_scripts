@@ -12,6 +12,7 @@ class App(Frame):
         self.parent.geometry("400x250")
         self.parent.title('Password Generator')
         self.var = IntVar()
+        self.var.set(12)
         self.pass_type = IntVar()
 
         self.scale = Scale(self.parent,
@@ -50,8 +51,8 @@ class App(Frame):
                              text="Get Password",
                              command=self.pass_gen)
         self.copy_btn = Button(self.btn_frm,
-                             text="Copy",
-                             command=self.copy_to_clip)
+                               text="Copy",
+                               command=self.copy_to_clip)
         self.btn_frm.pack(anchor=CENTER)
         self.button.pack(side=LEFT, pady=10)
         self.copy_btn.pack(side=LEFT, pady=10, padx=10)
