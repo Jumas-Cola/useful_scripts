@@ -45,10 +45,16 @@ class App(Frame):
         self.nums_only.pack(side=LEFT, pady=10)
         self.letters_only.pack(side=LEFT, pady=10)
 
-        self.button = Button(self.parent,
+        self.btn_frm = Frame()
+        self.button = Button(self.btn_frm,
                              text="Get Password",
                              command=self.pass_gen)
-        self.button.pack(anchor=CENTER, pady=10)
+        self.copy_btn = Button(self.btn_frm,
+                             text="Copy",
+                             command=self.copy_to_clip)
+        self.btn_frm.pack(anchor=CENTER)
+        self.button.pack(side=LEFT, pady=10)
+        self.copy_btn.pack(side=LEFT, pady=10, padx=10)
 
         self.entry = Entry(self.parent,
                            width=40)
@@ -71,9 +77,13 @@ class App(Frame):
         self.letters_only["bg"] = "#4671D5"
         self.letters_only["fg"] = "#FFFFFF"
         self.letters_only["font"] = "Helvetica 11 bold"
+        self.btn_frm["bg"] = "#4671D5"
         self.button["bg"] = "#FFAA00"
         self.button["fg"] = "#FFFFFF"
         self.button["font"] = "Helvetica 11 bold"
+        self.copy_btn["bg"] = "#FFAA00"
+        self.copy_btn["fg"] = "#FFFFFF"
+        self.copy_btn["font"] = "Helvetica 11 bold"
         self.entry["bg"] = "#98ADDE"
         self.entry["font"] = "Helvetica 11 bold"
         self.onRadio()
@@ -92,6 +102,14 @@ class App(Frame):
             self.default["fg"] = "#FFFFFF"
             self.nums_only["fg"] = "#FFFFFF"
             self.letters_only["fg"] = "#FFAA00"
+
+    def copy_to_clip(self):
+        r = Tk()
+        r.withdraw()
+        r.clipboard_clear()
+        r.clipboard_append(self.entry.get())
+        r.update()
+        r.destroy()
 
     def pass_gen(self):
         selection = ''
