@@ -9,6 +9,7 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from urllib.request import urlretrieve
+from urllib.parse import urlparse
 from selenium import webdriver
 import time
 import sys
@@ -16,7 +17,7 @@ import os
 from bs4 import BeautifulSoup
 
 
-def init_driver(path=r'C:\Program Files (x86)\Mozilla Firefox\firefox.exe'):
+def init_driver(path=r'C:\Program Files\Mozilla Firefox\firefox.exe'):
     gecko = os.path.normpath(os.path.join(
         os.path.dirname(__file__), 'geckodriver'))
     # ...path to firefox.exe
@@ -86,20 +87,21 @@ while True:
         break
     lastHeight = newHeight
     pos += offset
+    time.sleep(1)
 
 print('Total imgs count:'+str(len(find_set)))
 
-html = driver.page_source
-soup = BeautifulSoup(html, "html5lib")
-find_list = soup.select('a.torpedo-thumb-link')
-find_list = [href.get('href') for href in find_list]
 for href in find_set:
     print(href)
     driver.get(href)
     html = driver.page_source
-    soup = BeautifulSoup(html, 'lxml')
+    soup = BeautifulSoup(html, 'html5lib')
     src = soup.select('img.dev-content-normal')[0].get('src')
-    urlretrieve(src, dir+'/'+src.split('/')[-1])
+    for _ in range(10):
+        try:
+            urlretrieve(src, dir + '/' + urlparse(src).path.split('/')[-1])
+        except:
+            pass
 
 driver.quit()
 time.sleep(5)
