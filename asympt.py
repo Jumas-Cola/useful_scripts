@@ -5,13 +5,13 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 
 
-def plot(func, start, end, repeat=1, saveimg=0):
+def plot(func, start, end, step=1, repeat=1, saveimg=0):
     """
     Function for visualizing the asymptotics of algorithms.
 
-    Usage: asympt.plof("f({N})", start, end, repeats=1, saveimg=0)
+    Usage: asympt.plof("f({N})", start, end, step=1, repeats=1, saveimg=0)
     """
-    N = np.arange(start, end + 1)
+    N = np.arange(start, end + 1, step)
     data = {}
     func_name = func[:func.find('(')]
     for i in N:
