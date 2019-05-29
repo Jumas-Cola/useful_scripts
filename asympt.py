@@ -9,7 +9,7 @@ def plot(func, start, end, step=1, repeat=1, saveimg=0):
     """
     Function for visualizing the asymptotics of algorithms.
 
-    Usage: asympt.plof("f({N})", start, end, step=1, repeats=1, saveimg=0)
+    Usage: asympt.plof("f({N})", start, end, step=1, repeat=1, saveimg=0)
     """
     N = np.arange(start, end + 1, step)
     data = {}
