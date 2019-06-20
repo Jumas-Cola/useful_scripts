@@ -44,7 +44,10 @@ class FFDownloader:
         name = path_list[-1]
         path = os.path.join(os.getcwd(), *path_list[-4:-1])
         if not os.path.exists(path):
-            os.makedirs(path)
+            try:
+                os.makedirs(path)
+            except:
+                pass
         download(src, os.path.join(path, name))
 
 
