@@ -1,5 +1,5 @@
 <?php
-require_once('db_connect.php');
+require_once('auth/db_connect.php');
 
 if (!isset($_COOKIE["au"]) || (trim($_COOKIE["au"]) == '')) {
     header('location: auth.php');
