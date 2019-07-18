@@ -1,0 +1,13 @@
+.grey-back {
+    background: #F8F8F8;
+    border-radius: 15px;
+}
+
+.btn {
+    background: #2E3C61;
+    border-radius: 15px;
+}
+
+input {
+    border-radius: 15px !important;
+}
