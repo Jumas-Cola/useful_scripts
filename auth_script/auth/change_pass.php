@@ -32,7 +32,7 @@
                     <button type="submit" class="btn offset-4 col-4 text-light p-2 mt-3">
                         Сменить
                     </button>
-                    <a href="../auth.php" class="ml-2 mt-2">Назад</a>
+                    <a href="../" class="ml-2 mt-2">Назад</a>
                 </div>
             </form>
             <div class="text-danger m-3">
