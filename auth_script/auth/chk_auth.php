@@ -21,7 +21,7 @@ if (empty($srow)) {
     header('location: auth.php');
 }
 
-if ($_COOKIE['au'] != md5($srow[0]['access'] . $srow[0]['username'])) {
+if ($_COOKIE['au'] != md5($srow[0]['username'] . $srow[0]['password'])) {
     $_SESSION['msg'] = "Login Failed, Invalid Input!";
     header('location: auth.php');
 }

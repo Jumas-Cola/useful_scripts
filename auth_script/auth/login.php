@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
 
             if ($row[0]['access'] == 1) {
-                $value = md5($row[0]['access'] . $row[0]['username']);
+                $value = md5($row[0]['username'] . $row[0]['password']);
                 setcookie("au", $value, time() + 48 * 3600, "/");
                 setcookie("id", $row[0]['userid'], time() + 48 * 3600, "/");
                 ?>
