@@ -7,7 +7,7 @@ from functools import partial
 
 
 class UserPhotoCollector:
-    def __init__(self, token, id, folder_name=False, procs=10):
+    def __init__(self, token, id, folder_name=False, path=False, procs=10):
         self.v = '5.101'
         self.vk = vk_api.VkApi(token=token)
         user = self.vk.method(
@@ -19,7 +19,7 @@ class UserPhotoCollector:
             except:
                 folder_name = False
         self.folder_name = folder_name or self.id
-        self.path = os.path.join(os.path.dirname(
+        self.path = os.path.join(path, self.folder_name) or os.path.join(os.path.dirname(
             os.path.abspath(__file__)), self.folder_name)
         self.count = 1000
         self.procs = procs
