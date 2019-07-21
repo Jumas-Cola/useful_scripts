@@ -55,15 +55,15 @@ class UserPhotoCollector:
         return links
 
     def download_list(self, url_list, sub_path=False):
-        func = partial(self.download, os.path.join(
-            self.path, sub_path) if sub_path else self.path)
+        path = os.path.join(self.path, sub_path) if sub_path else self.path
+        if not os.path.exists(path):
+            os.makedirs(path)
+        func = partial(self.download, path)
         with Pool(self.procs) as p:
             p.map(func, url_list)
 
     @staticmethod
     def download(path, url):
-        if not os.path.exists(path):
-            os.makedirs(path)
         file = os.path.basename(urlparse(url).path)
         return urllib.request.urlretrieve(url, f'{path}/{file}')
 
