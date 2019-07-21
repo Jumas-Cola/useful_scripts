@@ -71,7 +71,7 @@ class UserPhotoCollector:
         for album in self.get_albums():
             if self.by_albums:
                 try:
-                    table = str.maketrans(dict.fromkeys(':*?”<>|'))
+                    table = str.maketrans(dict.fromkeys(':*?”"<>|'))
                     title = '{}_{}'.format(
                         album['title'].translate(table), album['id'])
                 except:
