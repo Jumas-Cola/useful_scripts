@@ -26,10 +26,13 @@ class UserPhotoCollector:
         self.by_albums = by_albums
 
     def get_albums(self):
-        return [i['id'] for i in self.vk.method('photos.getAlbums', {
-            'owner_id': self.id,
-            'v': self.v
-        })['items']] + ['wall', 'profile']
+        return [{'id': i['id'], 'title': i['title']}
+                for i in self.vk.method('photos.getAlbums', {
+                    'owner_id': self.id,
+                    'v': self.v
+                })['items']] +\
+            [{'id': 'wall', 'title': 'Фото_со_стены'},
+             {'id': 'profile', 'title': 'Фото_профиля'}]
 
     def get_photos(self, album, offset):
         return self.vk.method('photos.get', {
@@ -41,14 +44,14 @@ class UserPhotoCollector:
             'v': self.v
         })['items']
 
-    def get_all_photos(self, album):
+    def get_all_photos(self, album_id):
         links = []
         offset = 0
-        photos = self.get_photos(album, offset)
+        photos = self.get_photos(album_id, offset)
         while photos:
             links += [photo['sizes'][-1]['url'] for photo in photos]
             offset += self.count
-            photos = self.get_photos(album, offset)
+            photos = self.get_photos(album_id, offset)
         return links
 
     def download_list(self, url_list, sub_path=False):
@@ -67,6 +70,10 @@ class UserPhotoCollector:
     def dump(self):
         for album in self.get_albums():
             if self.by_albums:
-                self.download_list(self.get_all_photos(album), str(album))
+                try:
+                    title = '{}_{}'.format(album['title'], album['id'])
+                except:
+                    title = album['id']
+                self.download_list(self.get_all_photos(album['id']), title)
             else:
-                self.download_list(self.get_all_photos(album))
+                self.download_list(self.get_all_photos(album['id']))
