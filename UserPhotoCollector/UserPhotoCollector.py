@@ -15,7 +15,7 @@ class UserPhotoCollector:
         self.id = str(user['id'])
         if folder_name == 'surname':
             try:
-                folder_name = user['last_name']
+                folder_name = '{}_{}'.format(user['last_name'], self.id)
             except:
                 folder_name = False
         self.folder_name = folder_name or self.id
