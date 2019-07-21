@@ -7,7 +7,7 @@ from functools import partial
 
 
 class UserPhotoCollector:
-    def __init__(self, token, id, folder_name=False, path=False, procs=10):
+    def __init__(self, token, id, folder_name=False, path=False, procs=10, by_albums=False):
         self.v = '5.101'
         self.vk = vk_api.VkApi(token=token)
         user = self.vk.method(
@@ -19,10 +19,11 @@ class UserPhotoCollector:
             except:
                 folder_name = False
         self.folder_name = folder_name or self.id
-        self.path = os.path.join(path, self.folder_name) or os.path.join(os.path.dirname(
-            os.path.abspath(__file__)), self.folder_name)
+        self.path = os.path.join(path, self.folder_name) or os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), self.folder_name)
         self.count = 1000
         self.procs = procs
+        self.by_albums = by_albums
 
     def get_albums(self):
         return [i['id'] for i in self.vk.method('photos.getAlbums', {
@@ -50,18 +51,22 @@ class UserPhotoCollector:
             photos = self.get_photos(album, offset)
         return links
 
-    def download_list(self, url_list):
-        func = partial(self.download, self.path)
+    def download_list(self, url_list, sub_path=False):
+        func = partial(self.download, os.path.join(
+            self.path, sub_path) if sub_path else self.path)
         with Pool(self.procs) as p:
             p.map(func, url_list)
 
     @staticmethod
     def download(path, url):
         if not os.path.exists(path):
-            os.mkdir(path)
+            os.makedirs(path)
         file = os.path.basename(urlparse(url).path)
         return urllib.request.urlretrieve(url, f'{path}/{file}')
 
     def dump(self):
         for album in self.get_albums():
-            self.download_list(self.get_all_photos(album))
+            if self.by_albums:
+                self.download_list(self.get_all_photos(album), str(album))
+            else:
+                self.download_list(self.get_all_photos(album))
