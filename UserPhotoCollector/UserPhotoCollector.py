@@ -73,7 +73,7 @@ class UserPhotoCollector:
                 try:
                     table = str.maketrans(dict.fromkeys(r':*?”"<>|\\'))
                     title = '{}_{}'.format(
-                        album['title'].translate(table), album['id'])
+                        album['title'].translate(table).strip(), album['id'])
                 except:
                     title = album['id']
                 self.download_list(self.get_all_photos(album['id']), title.strip())
