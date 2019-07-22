@@ -71,11 +71,11 @@ class UserPhotoCollector:
         for album in self.get_albums():
             if self.by_albums:
                 try:
-                    table = str.maketrans(dict.fromkeys(':*?”"<>|'))
+                    table = str.maketrans(dict.fromkeys(r':*?”"<>|\\'))
                     title = '{}_{}'.format(
                         album['title'].translate(table), album['id'])
                 except:
                     title = album['id']
-                self.download_list(self.get_all_photos(album['id']), title)
+                self.download_list(self.get_all_photos(album['id']), title.strip())
             else:
                 self.download_list(self.get_all_photos(album['id']))
