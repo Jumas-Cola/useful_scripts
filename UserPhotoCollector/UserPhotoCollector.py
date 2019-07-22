@@ -76,6 +76,6 @@ class UserPhotoCollector:
                         album['title'].translate(table).strip(), album['id'])
                 except:
                     title = album['id']
-                self.download_list(self.get_all_photos(album['id']), title.strip())
+                self.download_list(self.get_all_photos(album['id']), title)
             else:
                 self.download_list(self.get_all_photos(album['id']))
