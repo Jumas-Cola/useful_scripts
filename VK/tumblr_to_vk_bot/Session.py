@@ -7,9 +7,10 @@ import os
 import re
 import json
 import random
+from bs4 import BeautifulSoup
 
 
-class Utils:
+class Session:
     curr_dir = os.path.dirname(os.path.abspath(__file__))
 
     def __init__(self, access_token, tumblr_user, posting_type=1):
@@ -43,15 +44,18 @@ class Utils:
                     if state[self.tumblr_user] < 0:
                         state[self.tumblr_user] = tmblr_count - 1
                 post = self.get_tmblr_post(state[self.tumblr_user])
-                if 'photo-url-1280' in post:
+                content = self.parse_content(post)
+                if content:
                     break
         elif self.posting_type == 0:
             # Случайный порядок
             for i in range(1000):
                 state[self.tumblr_user] = random.randint(0, tmblr_count - 1)
                 post = self.get_tmblr_post(state[self.tumblr_user])
-                if ('photo-url-1280' in post) and (not self.db.check(post['id'])):
-                    break
+                if not self.db.check(post['id']):
+                    content = self.parse_content(post)
+                    if content:
+                        break
             self.db.insert(post['id'])
         elif self.posting_type == -1:
             # Обратный порядок
@@ -63,26 +67,43 @@ class Utils:
                     if state[self.tumblr_user] >= self.get_tmblr_count():
                         state[self.tumblr_user] = 0
                 post = self.get_tmblr_post(state[self.tumblr_user])
-                if 'photo-url-1280' in post:
+                content = self.parse_content(post)
+                if content:
                     break
         with open(file, 'w') as f:
             f.write(json.dumps(state))
-        return post
+        return content
 
-    def make_vk_post(self, tmblr_post, group_id, message=None):
-        from_url = tmblr_post['url']
+    @staticmethod
+    def parse_content(post):
+        content = {}
+        imgs = []
+        if ('photos' in post) and post['photos']:
+            imgs.extend([photo['photo-url-1280'] for photo in post['photos']])
+        elif 'photo-url-1280' in post:
+            imgs.append(post['photo-url-1280'])
+        elif 'regular-body' in post:
+            soup = BeautifulSoup(post['regular-body'], 'html.parser')
+            imgs.extend([img.get('src') for img in soup.select('img')])
+        imgs = list(filter(lambda x: x, imgs))
+        if imgs:
+            content['imgs'] = imgs
+            content['url'] = post['url']
+            if 'photo-caption' in post:
+                content['photo-caption'] = Session.cleanhtml(post['photo-caption'])
+            else:
+                content['photo-caption'] = ''
+            return content
+        else:
+            return content
+
+    def make_vk_post(self, content, group_id, message=None):
         if message is None:
-            photo_caption = tmblr_post['photo-caption'] if 'photo-caption' in tmblr_post else None
             message = """{caption}
 
-            Источник: {from_url}""".format(from_url=from_url, caption=photo_caption)
+            Источник: {from_url}""".format(from_url=content['url'], caption=content['photo-caption'])
 
-        urls = []
-        if ('photos' in tmblr_post) and tmblr_post['photos']:
-            for photo in tmblr_post['photos']:
-                urls.append(photo['photo-url-1280'])
-        else:
-            urls.append(tmblr_post['photo-url-1280'])
+        urls = content['imgs']
 
         attachments = []
         for url in urls:
@@ -96,7 +117,7 @@ class Utils:
 
         self.vk_session.vk.method('wall.post', {
             'owner_id': group_id,
-            'message': self.cleanhtml(message),
+            'message': message,
             'attachments': ','.join(attachments)
         })
 
