@@ -1,0 +1,1 @@
+start pyw main.py
