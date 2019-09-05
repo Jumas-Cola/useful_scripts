@@ -16,6 +16,7 @@ from multiprocessing import Pool
 from functools import partial
 import sys
 import argparse
+import re
 
 
 def createParser():
@@ -42,12 +43,13 @@ def download(audios, folder='vk_music'):
     for audio in audios:
         url = audio['url']
         file_name = '{}-{}.mp3'.format(audio['artist'], audio['title'])
+        file_name = re.sub(r'[ \|/:*?"<>+%!@]', '_', file_name)
         print('Скачивание: {}'.format(file_name))
-        # try:
-        urlretrieve(url, os.path.join(folder, file_name))
-        print('Скачивание завершено: {}'.format(file_name))
-        # except:
-        # print('Не удалось скачать: {}'.format(file_name))
+        try:
+            urlretrieve(url, os.path.join(folder, file_name))
+            print('Скачивание завершено: {}'.format(file_name))
+        except:
+            print('Не удалось скачать: {}'.format(file_name))
 
 
 if __name__ == '__main__':
