@@ -12,34 +12,26 @@ class Ui_MainWindow(QMainWindow):
         self.setupUi()
 
     def setupUi(self):
-        self.setObjectName("MainWindow")
-        self.resize(548, 358)
+        self.setFixedSize(548, 358)
         self.centralwidget = QtWidgets.QWidget(self)
-        self.centralwidget.setObjectName("centralwidget")
         self.setCentralWidget(self.centralwidget)
 
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
-        self.gridLayout.setObjectName("gridLayout")
 
         self.menubar = QtWidgets.QMenuBar(self)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 26))
-        self.menubar.setObjectName("menubar")
         self.setMenuBar(self.menubar)
 
         self.statusbar = QtWidgets.QStatusBar(self)
-        self.statusbar.setObjectName("statusbar")
         self.setStatusBar(self.statusbar)
 
         self.login = Login_Form()
-        self.statusbar.setObjectName("login")
         self.gridLayout.addWidget(self.login)
 
         self.menu = QtWidgets.QMenu(self.menubar)
-        self.menu.setObjectName("menu")
 
         self.action = QtWidgets.QAction(self)
-        self.action.setObjectName("action")
 
         self.retranslateUi()
         self.setupHandlers()
@@ -59,10 +51,10 @@ class Ui_MainWindow(QMainWindow):
             errMsgBox.exec_()
 
     def initLogin(self):
-        self.audio_list.deleteLater()
+        # self.audio_list.deleteLater()
         for i in reversed(range(self.gridLayout.count())):
             self.gridLayout.itemAt(i).widget().setParent(None)
-        self.resize(548, 358)
+        self.setFixedSize(548, 358)
         self.login = Login_Form()
         self.statusbar.setObjectName("login")
         self.gridLayout.addWidget(self.login)
@@ -71,11 +63,11 @@ class Ui_MainWindow(QMainWindow):
         self.setupHandlers()
 
     def initAudioList(self):
-        self.login.deleteLater()
+        # self.login.deleteLater()
         for i in reversed(range(self.gridLayout.count())):
             self.gridLayout.itemAt(i).widget().setParent(None)
-        self.resize(771, 600)
-        self.audio_list = AudioList_Form(self.vk)
+        self.setFixedSize(771, 600)
+        self.audio_list = AudioList_Form(self)
         self.statusbar.setObjectName("audio_list")
         self.gridLayout.addWidget(self.audio_list)
 
