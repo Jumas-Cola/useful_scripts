@@ -118,9 +118,14 @@ class AudioList_Form(QWidget):
         self.parent.statusbar.showMessage('Загрузка...')
         self.parent.statusbar.repaint()
         try:
-            user = self.vk.method(
-                'users.get', {'user_ids': self.lineEdit.text()})[0]
-            self.user_id = user['id']
+            text = self.lineEdit.text()
+            if not text:
+                user = self.vk.method('users.get')[0]
+                self.user_id = user['id']
+                self.lineEdit.setText(str(self.user_id))
+            else:
+                user = self.vk.method('users.get', {'user_ids': text})[0]
+                self.user_id = user['id']
             self.folder = os.path.join(
                 get_download_folder(), '{}_audio'.format(self.user_id))
             self.audios = self.vk_audio.get(owner_id=self.user_id)
