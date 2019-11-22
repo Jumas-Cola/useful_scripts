@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <title>{% block title %}Order Form{% endblock %}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!-- Добавление дополнительного статического CSS файла -->
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  {% block additional_css %}{% endblock %}
+  {% block additional_js %}{% endblock %}
+</head>
+
+<body>
+  {% block navbar %}
+  <ul class="nav justify-content-end nav-tabs bg-info">
+    <li class="nav-item">
+      <a class="nav-link text-white" href="{% url 'index' %}">На главную</a>
+    </li>
+    {% if user.is_authenticated %}
+    <li class="nav-item">
+      <a class="nav-link text-white" href="{% url 'order_list' %}">Список заказов</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-white" href="{% url 'logout' %}?next={{request.path}}">Выйти</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-white disabled">User: {{ user.get_username }}</a>
+    </li>
+    {% else %}
+    <li class="nav-item">
+      <a class="nav-link text-white" href="{% url 'login' %}?next={{request.path}}">Войти</a>
+    </li>
+    {% endif %}
+  </ul>
+  {% endblock %}
+
+  <div class="container-fluid">
+    <div>
+      {% block content %}{% endblock %}
+
+      <div class="container mt-4">
+        {% block pagination %}
+        {% if is_paginated %}
+        <div class="pagination">
+          <span class="page-links">
+            {% if page_obj.has_previous %}
+            <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">назад</a>
+            {% endif %}
+            <span class="page-current">
+              Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+            </span>
+            {% if page_obj.has_next %}
+            <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">вперёд</a>
+            {% endif %}
+          </span>
+        </div>
+        {% endif %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+
+  <footer class="container pb-5 mt-5">
+    <p class="float-right"><a href="#">Back to top</a></p>
+    <p>© 2017-2018 Some Company, Inc.</p>
+  </footer>
+
+  <!-- Optional JavaScript -->
+  {% block additional_end_js %}{% endblock %}
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  {% block additional_after_all_js %}{% endblock %}
+</body>
+
+</html>

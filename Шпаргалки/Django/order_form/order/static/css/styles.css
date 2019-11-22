@@ -1,0 +1,19 @@
+.detail-text {
+  word-wrap: break-word;
+}
+
+#id_mechanism {
+  width: 40%;
+}
+
+#id_material {
+  width: 40%;
+}
+
+#id_address {
+  width: 100%;
+}
+
+#id_contacts {
+  width: 100%;
+}

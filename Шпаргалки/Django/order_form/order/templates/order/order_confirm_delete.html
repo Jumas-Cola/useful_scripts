@@ -1,0 +1,30 @@
+{% extends "base_generic.html" %}
+
+{# load static #}
+{# block additional_after_all_js #}
+<!-- <script type="text/javascript" src="{# static 'js/method_form.js' #}"></script> -->
+<!-- <script type="text/javascript" src="{# static 'js/form.js' #}"></script> -->
+{# endblock #}
+
+{% block content %}
+<section class="container mt-md-5 m-3 ml-auto mr-auto">
+  <div class="container p-3">
+    <h1>Удалить заказ</h1>
+      <p>Действительно ли вы хотите удалить данный заказ ?</p>
+      <div class="container mt-4">
+        <h1>Id:{{ object.id }}</h1>
+        <div><b>Механизм:</b> {{ object.mechanism }}</div>
+        <div><b>Материал:</b> {{ object.material }}</div>
+        <div class="detail-text"><b>Адрес:</b> {{ object.address|linebreaks }}</div>
+        <div class="detail-text"><b>Контактные данные:</b> {{ object.contacts|linebreaks }}</div>
+      </div>
+  </div>
+
+  <section class="container row m-3 ml-auto mr-auto">
+    <form action="" method="POST">
+      {% csrf_token %}
+      <input class="btn btn-danger" type="submit" action="" value="Да, удалить." />
+    </form>
+  </section>
+</section>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<div class="container mt-md-5 p-3">
+  <h1>Заказы{% if request.GET.search %} по запросу "{{ request.GET.search }}"{% endif %}</h1>
+  <form method='GET'>
+    {{ form }}
+    <input class="btn btn-primary" type='submit' value="Поиск">
+    <a href="{% url 'order_list' %}" class="btn btn-secondary">Все заказы</a>
+  </form>
+</div>
+
+<section class="container row m-3 ml-auto mr-auto">
+  {% if order_list %}
+  <ul class="list-unstyled col-12">
+
+    {% for order in order_list %}
+    <li class="mb-3">
+      <div class="card">
+        <div class="card-body">
+          <button type="button" class="close">
+            <a href="{% url 'order_delete' order.id %}" aria-hidden="true">&times;</a>
+          </button>
+          <h5 class="card-title">Id:{{ order.id }} {% if user.is_superuser %} - {{ order.author }} {% endif %}</h5>
+          <div class="card-text"><b>Механизм:</b> {{ order.mechanism }}</div>
+          <div class="card-text"><b>Материал:</b> {{ order.material }}</div>
+          <div class="card-text"><b>Адрес:</b> {{ order.address|truncatechars:80 }}</div>
+          <div class="card-text"><b>Контактные данные:</b> {{ order.contacts|truncatechars:80 }}</div>
+          <a href="{{ order.id }}" class="btn btn-primary mt-3">Подробнее</a>
+        </div>
+      </div>
+    </li>
+    {% endfor %}
+
+  </ul>
+  {% else %}
+  <p>Здесь ещё нет заказов.</p>
+  {% endif %}
+</section>
+{% endblock %}

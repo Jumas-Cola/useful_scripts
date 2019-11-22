@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+{% block title %}Детали заказа{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h1>Id:{{ object.id }}</h1>
+  <div><b>Механизм:</b> {{ object.mechanism }}</div>
+  <div><b>Материал:</b> {{ object.material }}</div>
+  <div class="detail-text"><b>Адрес:</b> {{ object.address|linebreaks }}</div>
+  <div class="detail-text"><b>Контактные данные:</b> {{ object.contacts|linebreaks }}</div>
+  <a class="btn btn-secondary mt-3" href="{% url 'order_update' object.id %}">Изменить</a>
+  <a class="btn btn-secondary mt-3" href="{% url 'order_delete' object.id %}">Удалить</a>
+</div>
+{% endblock %}
