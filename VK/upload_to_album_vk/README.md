@@ -13,7 +13,7 @@
 3. **Выберите папку с изображениями.**
 4. **Нажмите кнопку "Загрузить".**
 
-[![screenshot](/ "screenshot")](https://github.com/Jumas-Cola/useful_scripts/blob/master/VK/upload_to_album_vk/screen.png "screenshot")
+[![screenshot](/ "screenshot")](https://raw.githubusercontent.com/Jumas-Cola/useful_scripts/master/VK/upload_to_album_vk/screen.png "screenshot")
 ------------
 
 ### License
