@@ -1,0 +1,4 @@
+PyAudio==0.2.11
+pynput==1.6.5
+pyperclip==1.7.0
+SpeechRecognition==3.8.1
