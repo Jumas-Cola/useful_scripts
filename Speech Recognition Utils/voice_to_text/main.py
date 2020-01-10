@@ -1,10 +1,7 @@
-# личный голосовой ассистент
 import speech_recognition as sr
-# import pyautogui
 import pyperclip
 from pynput.keyboard import Key, Controller
 import winsound
-# import time
 
 options = {
     'write_alias': ('напиши', 'пиши'),
