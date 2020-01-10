@@ -4,7 +4,7 @@ from pynput.keyboard import Key, Controller
 import winsound
 
 options = {
-    'write_alias': ('напиши', 'пиши'),
+    'write_alias': ('напиши', 'пиши', 'запиши'),
 }
 
 
@@ -22,7 +22,10 @@ def callback(recognizer, audio):
                     voice = voice[0].upper() + voice[1:]
                     break
             write_text(voice)
+            print('[log] Text writed')
+            winsound.Beep(294, 300)
         else:
+            print('[log] Command not found')
             winsound.Beep(262, 200)
             winsound.Beep(220, 200)
 
@@ -39,12 +42,14 @@ def write_text(text):
     keyboard.press('v')
     keyboard.release('v')
     keyboard.release(Key.ctrl.value)
-    winsound.Beep(294, 300)
 
 
 # запуск
 rec = sr.Recognizer()
 mic = sr.Microphone(device_index=2)
+rec.dynamic_energy_adjustment_damping = 0.08
+rec.dynamic_energy_adjustment_ratio = 2
+rec.pause_threshold = 0.5
 
 # with mic as source:
 #     rec.adjust_for_ambient_noise(source)
@@ -55,9 +60,6 @@ mic = sr.Microphone(device_index=2)
 while True:
     with mic as source:
         try:
-            rec.dynamic_energy_adjustment_damping = 0.08
-            rec.dynamic_energy_adjustment_ratio = 2
-            rec.pause_threshold = 0.5
             rec.adjust_for_ambient_noise(source, duration=1)
             audio = rec.listen(source)
             callback(rec, audio)
