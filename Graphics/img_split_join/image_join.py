@@ -5,16 +5,23 @@ import random as rd
 import sys
 
 
+def avg(l):
+    return sum(l) / len(l)
+
+
 def color_dist(im_array_1, im_array_2, penalty=2):
-    return sum(map(sum, (im_array_1 - im_array_2) ** penalty))
+    # return sum(map(sum, (im_array_1 - im_array_2) ** penalty))
+    return avg(list(map(sum, (im_array_1 - im_array_2) ** penalty)))
 
 
 if len(sys.argv) > 1:
     folder = sys.argv[1]
 else:
-    raise Exception('[Error!] Dir path not entered\nUsage: main.py <path_to_folder>')
+    raise Exception(
+        '[Error!] Dir path not entered\nUsage: main.py <path_to_folder>')
 
-imgs = [np.asarray(Image.open(os.path.join(folder, im_name))) for im_name in os.listdir(folder)]
+imgs = [np.asarray(Image.open(os.path.join(folder, im_name)))
+        for im_name in os.listdir(folder)]
 rd.shuffle(imgs)
 
 max_height = imgs[0].shape[0]
@@ -34,8 +41,10 @@ for i in range(len(imgs) - 1):
     img_1 = imgs.pop()
     min_dist_img = (float('inf'), 0, '')
     for n, img_2 in enumerate(imgs):
-        dist_r = color_dist(img_1[:, -1:].reshape(-1, channels), img_2[:, 0:1].reshape(-1, channels))
-        dist_l = color_dist(img_1[:, 0:1].reshape(-1, channels), img_2[:, -1:].reshape(-1, channels))
+        dist_r = color_dist(
+            img_1[:, -1:].reshape(-1, channels), img_2[:, 0:1].reshape(-1, channels))
+        dist_l = color_dist(
+            img_1[:, 0:1].reshape(-1, channels), img_2[:, -1:].reshape(-1, channels))
         if dist_r < min_dist_img[0]:
             min_dist_img = (dist_r, n, 'r')
         if dist_l < min_dist_img[0]:
