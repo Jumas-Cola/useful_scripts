@@ -1,13 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d10e5aac-a399-4026-91ea-2f3073965c5b" name="Default Changelist" comment="" />
+    <list default="true" id="d10e5aac-a399-4026-91ea-2f3073965c5b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/img_gluer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/img_gluer.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/full.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/image_join.py" beforeDir="false" afterPath="$PROJECT_DIR$/image_join.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgs/0.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgs/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgs/10.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgs/11.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgs/12.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgs/13.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgs/14.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgs/15.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgs/16.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgs/17.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgs/18.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgs/19.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgs/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgs/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgs/4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgs/5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgs/6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgs/7.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgs/8.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/imgs/9.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output.jpg" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
   <component name="ProjectId" id="1Xz6ZK2lPHgVjzrwOSKrbmgc6Wg" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -15,6 +47,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/imgs" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
@@ -111,22 +144,22 @@
       <screen x="900" y="360" width="1920" height="1080" />
     </state>
     <state x="1584" y="581" width="530" height="599" key="FileChooserDialogImpl/900.360.1920.1080/0.0.900.1400@900.360.1920.1080" timestamp="1582114810796" />
-    <state width="1895" height="196" key="GridCell.Tab.0.bottom" timestamp="1582153619751">
+    <state width="1895" height="196" key="GridCell.Tab.0.bottom" timestamp="1582322371299">
       <screen x="900" y="360" width="1920" height="1080" />
     </state>
-    <state width="1895" height="196" key="GridCell.Tab.0.bottom/900.360.1920.1080/0.0.900.1400@900.360.1920.1080" timestamp="1582153619751" />
-    <state width="1895" height="196" key="GridCell.Tab.0.center" timestamp="1582153619750">
+    <state width="1895" height="196" key="GridCell.Tab.0.bottom/900.360.1920.1080/0.0.900.1400@900.360.1920.1080" timestamp="1582322371299" />
+    <state width="1895" height="196" key="GridCell.Tab.0.center" timestamp="1582322371299">
       <screen x="900" y="360" width="1920" height="1080" />
     </state>
-    <state width="1895" height="196" key="GridCell.Tab.0.center/900.360.1920.1080/0.0.900.1400@900.360.1920.1080" timestamp="1582153619750" />
-    <state width="1895" height="196" key="GridCell.Tab.0.left" timestamp="1582153619750">
+    <state width="1895" height="196" key="GridCell.Tab.0.center/900.360.1920.1080/0.0.900.1400@900.360.1920.1080" timestamp="1582322371299" />
+    <state width="1895" height="196" key="GridCell.Tab.0.left" timestamp="1582322371299">
       <screen x="900" y="360" width="1920" height="1080" />
     </state>
-    <state width="1895" height="196" key="GridCell.Tab.0.left/900.360.1920.1080/0.0.900.1400@900.360.1920.1080" timestamp="1582153619750" />
-    <state width="1895" height="196" key="GridCell.Tab.0.right" timestamp="1582153619751">
+    <state width="1895" height="196" key="GridCell.Tab.0.left/900.360.1920.1080/0.0.900.1400@900.360.1920.1080" timestamp="1582322371299" />
+    <state width="1895" height="196" key="GridCell.Tab.0.right" timestamp="1582322371299">
       <screen x="900" y="360" width="1920" height="1080" />
     </state>
-    <state width="1895" height="196" key="GridCell.Tab.0.right/900.360.1920.1080/0.0.900.1400@900.360.1920.1080" timestamp="1582153619751" />
+    <state width="1895" height="196" key="GridCell.Tab.0.right/900.360.1920.1080/0.0.900.1400@900.360.1920.1080" timestamp="1582322371299" />
     <state width="1895" height="325" key="GridCell.Tab.1.bottom" timestamp="1582059489793">
       <screen x="900" y="360" width="1920" height="1080" />
     </state>
@@ -143,10 +176,10 @@
       <screen x="900" y="360" width="1920" height="1080" />
     </state>
     <state width="1895" height="325" key="GridCell.Tab.1.right/900.360.1920.1080/0.0.900.1400@900.360.1920.1080" timestamp="1582059489793" />
-    <state x="1240" y="427" width="1239" height="906" key="SettingsEditor" timestamp="1582137114109">
+    <state x="1240" y="427" width="1239" height="906" key="SettingsEditor" timestamp="1582308955828">
       <screen x="900" y="360" width="1920" height="1080" />
     </state>
-    <state x="1240" y="427" width="1239" height="906" key="SettingsEditor/900.360.1920.1080/0.0.900.1400@900.360.1920.1080" timestamp="1582137114109" />
+    <state x="1240" y="427" width="1239" height="906" key="SettingsEditor/900.360.1920.1080/0.0.900.1400@900.360.1920.1080" timestamp="1582308955828" />
     <state x="1024" y="753" key="com.intellij.ide.util.TipDialog" timestamp="1582114774018">
       <screen x="900" y="360" width="1920" height="1080" />
     </state>

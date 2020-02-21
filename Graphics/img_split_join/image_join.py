@@ -5,13 +5,14 @@ import random as rd
 import sys
 
 
-def avg(l):
-    return sum(l) / len(l)
+def avg(arr):
+    return np.sum(arr) / arr.shape[0]
 
 
-def color_dist(im_array_1, im_array_2, penalty=2):
-    # return sum(map(sum, (im_array_1 - im_array_2) ** penalty))
-    return avg(list(map(sum, (im_array_1 - im_array_2) ** penalty)))
+def color_dist(im_array_1, im_array_2, power=2):
+    im_array_1 = im_array_1.astype(np.float32)
+    im_array_2 = im_array_2.astype(np.float32)
+    return avg(np.array(list(map(lambda x: np.sum(x) ** .5, (im_array_1 - im_array_2) ** power))))
 
 
 if len(sys.argv) > 1:
