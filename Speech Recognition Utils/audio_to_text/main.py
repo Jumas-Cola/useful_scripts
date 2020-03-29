@@ -9,19 +9,21 @@ from pydub import AudioSegment
 /*JS for showing voice messages hrefs from vk*/
 var voice_msgs = document.querySelectorAll('[id^="audiomsgpl_"');
 for (let i=0; i < voice_msgs.length; i++) {
-    console.log(voice_msgs[i].getAttribute('data-mp3'));
+    console.log(voice_msgs[i].getAttribute('data-audio'));
 }
 '''
 
-dir = 'audio_mp3'
-mp3_s = os.listdir(dir)
+dir = 'audio'
+audio_s = os.listdir(dir)
 
 
-for mp3_file in mp3_s:
+for audio_file in audio_s:
 
-    # export mp3 to wav
-    sound = AudioSegment.from_mp3(os.path.join(dir, mp3_file))
-    wav_path = os.path.join('audio_wav', mp3_file.split('.')[0] + '.wav')
+    file_ext = os.path.splitext(audio_file)[1][1:]
+
+    # export audio to wav
+    sound = AudioSegment.from_file(os.path.join(dir, audio_file), file_ext)
+    wav_path = os.path.join('audio_wav', audio_file.split('.')[0] + '.wav')
     if not os.path.exists('audio_wav'):
         os.mkdir('audio_wav')
     sound.export(wav_path, format="wav")
