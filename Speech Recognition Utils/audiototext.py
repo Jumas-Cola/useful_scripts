@@ -5,14 +5,9 @@ import os
 from pydub import AudioSegment
 import sys
 
-
-'''
-/*JS for showing voice messages hrefs from vk*/
-var voice_msgs = document.querySelectorAll('[id^="audiomsgpl_"');
-for (let i=0; i < voice_msgs.length; i++) {
-    console.log(voice_msgs[i].getAttribute('data-audio'));
-}
-'''
+if not sys.argv[1:]:
+    print('\nUsage:\naudiototext.py <path_to_audiofile1> <path_to_audiofile2>...\n')
+    sys.exit()
 
 print('\n' + 'Start Recognizing'.center(30, '_') + '\n')
 
@@ -46,5 +41,4 @@ for audio_file in sys.argv[1:]:
     os.remove(wav_path)
 
 print('Finished'.center(30, '_'))
-input()
 
