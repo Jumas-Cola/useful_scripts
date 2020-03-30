@@ -3,6 +3,7 @@
 import speech_recognition as sr
 import os
 from pydub import AudioSegment
+import sys
 
 
 '''
@@ -13,21 +14,17 @@ for (let i=0; i < voice_msgs.length; i++) {
 }
 '''
 
-dir = 'audio'
-audio_s = os.listdir(dir)
+print('\n' + 'Start Recognizing'.center(30, '_') + '\n')
 
+for audio_file in sys.argv[1:]:
 
-for audio_file in audio_s:
-
-    file_ext = os.path.splitext(audio_file)[1][1:]
+    file_path, file_ext = os.path.splitext(audio_file)
+    file_ext = file_ext[1:]
 
     # export audio to wav
-    sound = AudioSegment.from_file(os.path.join(dir, audio_file), file_ext)
-    wav_path = os.path.join('audio_wav', audio_file.split('.')[0] + '.wav')
-    if not os.path.exists('audio_wav'):
-        os.mkdir('audio_wav')
+    sound = AudioSegment.from_file(audio_file, file_ext)
+    wav_path = file_path + '.wav'
     sound.export(wav_path, format="wav")
-
 
     r = sr.Recognizer()
 
@@ -36,12 +33,18 @@ for audio_file in audio_s:
 
     try:
         s = r.recognize_google(audio, language='ru-RU')
-        print('Text: ' + s)
-        print()
+        print('File: {}'.format(audio_file))
+        print('Text:')
+        print(s + '\n')
         with open('output.txt', 'a') as f:
-            f.write('File: {}\n'.format(wav_path))
-            f.write('Recognized:\n')
+            f.write('File: {}\n'.format(audio_file))
+            f.write('Text:\n')
             f.write(s + '\n\n')
     except Exception as e:
         print('Exception: ' + str(e))
+
+    os.remove(wav_path)
+
+print('Finished'.center(30, '_'))
+input()
 
