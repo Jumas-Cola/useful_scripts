@@ -3,6 +3,12 @@ import youtube_dl
 import os
 from multiprocessing import Pool
 
+'''
+Usage:
+python3 video_download.py <url1> <url2>...
+or
+python3 video_download.py -f file.txt
+'''
 
 def downloader(url):
 
