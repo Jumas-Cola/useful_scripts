@@ -115,7 +115,7 @@ def downloader(iterable):
                 if not chunk:
                     break
                 f_handler.write(chunk)
-        return fname
+    return 1
 
 @Processify(processes=10)
 def simples(iterable, end='1'):
