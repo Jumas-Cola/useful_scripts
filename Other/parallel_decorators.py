@@ -131,9 +131,9 @@ def main():
             'http://www.irs.gov/pub/irs-pdf/f1040es.pdf',
             'http://www.irs.gov/pub/irs-pdf/f1040sb.pdf']
     start_time = time.perf_counter()
-    file_name = downloader(urls)
+    return_codes = downloader(urls)
     td = time.perf_counter() - start_time
-    print(file_name , td)
+    print(return_codes, td)
 
     start_time = time.perf_counter()
     simple_nums = simples(range(10000000), end='6421')
