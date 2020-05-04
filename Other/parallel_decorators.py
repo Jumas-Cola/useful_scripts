@@ -107,14 +107,8 @@ import urllib.request
 @Threadify(threads=10)
 def downloader(iterable):
     for url in iterable:
-        handle = urllib.request.urlopen(url)
         fname = os.path.basename(url)
-        with open(fname, "wb") as f_handler:
-            while True:
-                chunk = handle.read(1024)
-                if not chunk:
-                    break
-                f_handler.write(chunk)
+        urllib.request.urlretrieve(url, fname)
     return 1
 
 @Processify(processes=10)
