@@ -103,5 +103,5 @@ nnoremap <C-P> :bprev<CR>
 " Выключаем звук в Vim
 set visualbell t_vb=
 
-set guifont=Monaco
+set guifont=JetBrains\ Mono\ Regular
 colorscheme deep-space
