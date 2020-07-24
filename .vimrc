@@ -29,6 +29,7 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 Plugin 'flazz/vim-colorschemes'
 Plugin 'mattn/emmet-vim'
+Plugin 'tmhedberg/simpylfold'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -44,6 +45,16 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+
+" vim-plug
+call plug#begin('~/.vim/plugged')
+
+" Make sure you use single quotes
+
+Plug 'stevearc/vim-arduino'
+
+" Initialize plugin system
+call plug#end()
 
 
 " Настройки табов для Python, согласно рекоммендациям
