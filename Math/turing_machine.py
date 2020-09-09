@@ -56,7 +56,17 @@ class TM:
         return ''.join(self.tape).strip('0')
 
 
-parser = argparse.ArgumentParser(description='Turing machine interpreter.')
+parser = argparse.ArgumentParser(
+    formatter_class=argparse.RawDescriptionHelpFormatter,
+    description='''
+    Turing machine interpreter.
+
+    Example program - adding 2 numbers (111*1111):
+    q1 * -> qz 0 E
+    q1 1 -> q2 0 R
+    q2 1 -> q2 1 R
+    q2 * -> qz 1 E
+    ''')
 parser.add_argument('-v', '--verbose', action='store_true')
 parser.add_argument('-p', '--program_file', required=True, help='File with Turing machine program.')
 parser.add_argument('-t', '--tape', required=True, help='String with start tape configuration.')
