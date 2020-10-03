@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <style>
+        @font-face {
+          font-family: mononoki;
+          src: url(fonts/mononoki.ttf);
+        }
+        * {
+            font-family: mononoki, mono;
+        }
+    </style>
+    <title>Normal algorithm</title>
+</head>
+<body>
+    <div class="container row justify-content-center mt-2">
+        <label class="offset-2 col-8" for="tape">Tape:</label>
+        <input class="offset-2 col-8" type="text" id="tape" value="111*1111">
+        <label class="offset-2 col-8 mt-2" for="program">Program:</label>
+        <textarea class="offset-2 col-8" id="program" name="program" cols="30" rows="10">
+1*1 -> *
+*1  -> b
+*   -> .1
+b1  -> b
+b   -> .1
+        </textarea>
+
+        <div class="offset-2 col-8 mt-2">
+            <button class="w-25" id="runBtn" type="button">Run</button>
+            <button class="w-25" id="stopBtn" type="button">Stop</button>
+            <label for="timeInterval">Time interval:</label>
+            <select name="timeInterval" id="timeInterval">
+                <option value="0">0s</option>
+                <option value="400" selected="selected">0.4s</option>
+                <option value="600">0.6s</option>
+                <option value="800">0.8s</option>
+                <option value="1000">1s</option>
+            </select>
+        </div>
+
+        <label class="offset-2 col-8 mt-3" for="output">Output:</label>
+        <textarea class="offset-2 col-8" id="output" name="output" cols="30" rows="10"></textarea>
+        <label class="offset-2 col-8 mt-2" for="result">Result:</label>
+        <h4 class="offset-2 col-8" id="result"></h4>
+    </div>
+ 
+    <script>
+        class NA {
+            constructor() {
+                this.counter = 1;
+                this.tape = '';
+                this.stop = true;
+                this.timeout = parseInt(timeInterval.value);
+            }
+
+            stopSwitch() {
+                this.stop = !this.stop;
+            }
+
+            printState() {
+                output.value += this.counter + '. ' + this.tape + '\n';
+                this.counter++;
+                output.scrollTop = output.scrollHeight;
+            }
+
+            runProgram() {
+                if (this.stop) {
+                    return;
+                }
+                if (this.tape.length == 0) {
+                    result.innerText = 'Tape is empty';
+                    this.stop = true;
+                    return;
+                }
+                this.printState();
+                let match_instr = false;
+                for (var instr of this.programList) {
+                    let [from_instr, to_instr] = instr;
+                    if (this.tape.includes(from_instr)) {
+                        this.tape = this.tape.replace(from_instr, to_instr.replace('.', ''))
+                        if (to_instr[0] == '.') {
+                            this.printState();
+                            result.innerText = this.tape;
+                            this.stop = true;
+                            return;
+                        }
+                        match_instr = true;
+                        break
+                    }
+                }
+                if (! match_instr) {
+                    result.innerText = 'Infinite loop';
+                    this.stop = true;
+                    return;
+                }
+                setTimeout(this.runProgram.bind(this), this.timeout);
+            }
+
+            execute(tape, program) {
+                this.counter = 1;
+                this.tape = [];
+                this.stop = false;
+
+                output.value = '';
+                result.innerText = '';
+                this.tape = tape.replace(/^0+|0+$/g, '');
+                var programList = [];
+                for (var l of program.split('\n')) {
+                    if (l.length > 0) {
+                        let [from_instr, to_instr] = l.replace(/\s/g, '').split('->');
+                        if (from_instr.length > 0 && to_instr.length > 0) {
+                            programList.push([from_instr, to_instr]);
+                        }
+                    }
+                };
+                this.programList = programList;
+                console.log(programList);
+                this.runProgram();
+            }
+        }
+
+        var na = new NA();
+        runBtn.onclick = function() {
+            if (na.stop) {
+                console.log(1);
+                na.execute(document.querySelector('#tape').value,
+                            document.querySelector('#program').value);
+            }
+        };
+        stopBtn.onclick = function() {
+            na.stopSwitch();
+        };
+        timeInterval.onchange = function() {
+            na.timeout = parseInt(timeInterval.value);
+        }
+    </script>
+</body>
+</html>
