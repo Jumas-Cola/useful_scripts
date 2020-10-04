@@ -65,6 +65,11 @@ b   -> .1
                 output.scrollTop = output.scrollHeight;
             }
 
+            printToOutput(outStr) {
+                output.value += outStr + '\n';
+                output.scrollTop = output.scrollHeight;
+            }
+
             runProgram() {
                 if (this.stop) {
                     return;
@@ -79,6 +84,8 @@ b   -> .1
                 for (var instr of this.programList) {
                     let [from_instr, to_instr] = instr;
                     if (this.tape.includes(from_instr)) {
+                        this.printToOutput(' '.repeat((''+this.counter).length) + '  ' 
+                                    + from_instr + ' -> ' + to_instr);
                         if (from_instr == '') {
                             this.tape = to_instr.replace('.', '') + this.tape;
                         } else {
