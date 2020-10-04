@@ -79,7 +79,11 @@ b   -> .1
                 for (var instr of this.programList) {
                     let [from_instr, to_instr] = instr;
                     if (this.tape.includes(from_instr)) {
-                        this.tape = this.tape.replace(from_instr, to_instr.replace('.', ''))
+                        if (from_instr == '') {
+                            this.tape = to_instr.replace('.', '') + this.tape;
+                        } else {
+                            this.tape = this.tape.replace(from_instr, to_instr.replace('.', ''));
+                        }
                         if (to_instr[0] == '.') {
                             this.printState();
                             result.innerText = this.tape;
@@ -109,10 +113,7 @@ b   -> .1
                 var programList = [];
                 for (var l of program.split('\n')) {
                     if (l.length > 0) {
-                        let [from_instr, to_instr] = l.replace(/\s/g, '').split('->');
-                        if (from_instr.length > 0 && to_instr.length > 0) {
-                            programList.push([from_instr, to_instr]);
-                        }
+                        programList.push(l.replace(/\s/g, '').split('->'));
                     }
                 };
                 this.programList = programList;
