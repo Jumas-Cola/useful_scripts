@@ -7,7 +7,7 @@ class MNR:
     def __init__(self, tape, prog):
         self.I = []
         self.parser(prog)
-        self.R = {n: int(r) for n, r in enumerate(tape.strip(), 1)}
+        self.R = {n: r for n, r in enumerate(tape, 1)}
         self.i = 0
 
     def Z(self, n):
@@ -82,20 +82,24 @@ class MNR:
 
 
 prog = '''
-        J(1, 3, 9)
         J(2, 3, 9)
-        J(2, 3, 7)
-        S(1)
+        J(1, 3, 5)
         S(3)
-        J(1, 1, 3)
+        J(1, 1, 1)
+        Z(1)
         Z(2)
         Z(3)
         J(1, 1, 100)
-        Z(1)
+        Z(3)
+        J(3, 2, 14)
+        S(3)
+        S(1)
+        J(1, 1, 10)
         Z(2)
+        Z(3)
         J(1, 1, 100)
 '''
-tape = '34'
+tape = [4, 5]
 
 m = MNR(tape, prog)
 m.run()
