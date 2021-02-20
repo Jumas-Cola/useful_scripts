@@ -30,6 +30,10 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'flazz/vim-colorschemes'
 Plugin 'mattn/emmet-vim'
 Plugin 'tmhedberg/simpylfold'
+Plugin 'suan/vim-instant-markdown', {'rtp': 'after'}
+Plugin 'preservim/nerdtree'
+
+let g:instant_markdown_browser = "firefox --new-window"
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -50,8 +54,6 @@ filetype plugin indent on    " required
 call plug#begin('~/.vim/plugged')
 
 " Make sure you use single quotes
-
-Plug 'stevearc/vim-arduino'
 
 " Initialize plugin system
 call plug#end()
@@ -115,4 +117,12 @@ nnoremap <C-P> :bprev<CR>
 set visualbell t_vb=
 
 set guifont=JetBrains\ Mono\ Regular
-colorscheme deep-space
+set background=dark
+set termguicolors
+colorscheme onedark
+
+" NERDTree shortcuts
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
