@@ -17,6 +17,7 @@ Plugin 'mattn/emmet-vim'
 Plugin 'tmhedberg/simpylfold'
 Plugin 'suan/vim-instant-markdown', {'rtp': 'after'}
 Plugin 'preservim/nerdtree'
+Plugin 'tell-k/vim-autopep8'
 
 let g:instant_markdown_browser = "firefox --new-window"
 
