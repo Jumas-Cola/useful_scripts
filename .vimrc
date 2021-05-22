@@ -31,6 +31,7 @@ Plugin 'iamcco/markdown-preview.nvim'
 Plugin 'Yggdroot/indentLine'
 Plugin 'tpope/vim-commentary'
 Plugin 'townk/vim-autoclose'
+Plugin 'nelsyeung/twig.vim'
 
 let g:instant_markdown_browser = "firefox --new-window"
 
@@ -116,7 +117,6 @@ nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
-
 
 
 
@@ -286,3 +286,6 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+" Install Packages
+" :CocInstall coc-python
