@@ -32,6 +32,7 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'tpope/vim-commentary'
 Plugin 'townk/vim-autoclose'
 Plugin 'nelsyeung/twig.vim'
+Plugin 'dyng/ctrlsf.vim'
 
 let g:instant_markdown_browser = "firefox --new-window"
 
@@ -289,3 +290,5 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " Install Packages
 " :CocInstall coc-python
+" :CocInstall coc-tsserver
+" :CocInstall coc-phpls
