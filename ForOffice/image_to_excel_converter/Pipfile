@@ -1,0 +1,18 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+et-xmlfile = "==1.0.1"
+jdcal = "==1.4.1"
+numpy = "==1.16.4"
+openpyxl = "==2.6.2"
+shiboken2 = "==5.13.0"
+Pillow = "==6.0.0"
+PySide2 = "==5.13.0"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"

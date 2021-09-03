@@ -24,7 +24,6 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'rafi/awesome-vim-colorschemes'
 Plugin 'mattn/emmet-vim'
 Plugin 'tmhedberg/simpylfold'
-Plugin 'suan/vim-instant-markdown', {'rtp': 'after'}
 Plugin 'preservim/nerdtree'
 Plugin 'tell-k/vim-autopep8'
 Plugin 'iamcco/markdown-preview.nvim' 
@@ -33,8 +32,9 @@ Plugin 'tpope/vim-commentary'
 Plugin 'townk/vim-autoclose'
 Plugin 'nelsyeung/twig.vim'
 Plugin 'dyng/ctrlsf.vim'
-
-let g:instant_markdown_browser = "firefox --new-window"
+Plugin 'fatih/vim-go'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -119,7 +119,8 @@ nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 
-
+" NERDTree auto update
+autocmd BufWritePost * NERDTreeFocus | execute 'normal R' | wincmd p
 
 " Coc config
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
@@ -292,3 +293,14 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " :CocInstall coc-python
 " :CocInstall coc-tsserver
 " :CocInstall coc-phpls
+
+let php_folding = 1        "Set PHP folding of classes and functions.
+let php_htmlInStrings = 1  "Syntax highlight HTML code inside PHP strings.
+let php_sql_query = 1      "Syntax highlight SQL code inside PHP strings.
+let php_noShortTags = 1    "Disable PHP short tags.
+
+let g:airline_powerline_fonts = 1 "Включить поддержку Powerline шрифтов
+let g:airline#extensions#keymap#enabled = 0 "Не показывать текущий маппинг
+let g:airline_section_z = "\ue0a1:%l/%L Col:%c" "Кастомная графа положения курсора
+let g:Powerline_symbols='unicode' "Поддержка unicode
+let g:airline#extensions#xkblayout#enabled = 0 "Про это позже расскажу
