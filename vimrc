@@ -96,6 +96,9 @@ set fileencodings=utf8,cp1251
 set clipboard=unnamed
 set ruler
 
+" Псевдоним для esc
+inoremap jk <esc>
+
 " Нумерация строк
 set number
 " Запретить перенос строк
@@ -108,7 +111,7 @@ nnoremap <C-P> :bprev<CR>
 " Выключаем звук в Vim
 set visualbell t_vb=
 
-set guifont=JetBrains\ Mono\ Regular
+set guifont=Fira\ Code
 set background=dark
 set termguicolors
 colorscheme onedark
@@ -294,7 +297,7 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " :CocInstall coc-tsserver
 " :CocInstall coc-phpls
 
-let php_folding = 1        "Set PHP folding of classes and functions.
+let php_folding = 0        "Set PHP folding of classes and functions.
 let php_htmlInStrings = 1  "Syntax highlight HTML code inside PHP strings.
 let php_sql_query = 1      "Syntax highlight SQL code inside PHP strings.
 let php_noShortTags = 1    "Disable PHP short tags.
@@ -304,3 +307,6 @@ let g:airline#extensions#keymap#enabled = 0 "Не показывать теку�
 let g:airline_section_z = "\ue0a1:%l/%L Col:%c" "Кастомная графа положения курсора
 let g:Powerline_symbols='unicode' "Поддержка unicode
 let g:airline#extensions#xkblayout#enabled = 0 "Про это позже расскажу
+
+" Custom Commands
+command PrettyJson %!python -m json.tool
