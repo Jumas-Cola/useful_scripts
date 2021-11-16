@@ -298,10 +298,16 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " :CocInstall coc-tsserver
 " :CocInstall coc-phpls
 
-let php_folding = 0        "Set PHP folding of classes and functions.
+let php_folding = 1        "Set PHP folding of classes and functions.
 let php_htmlInStrings = 1  "Syntax highlight HTML code inside PHP strings.
 let php_sql_query = 1      "Syntax highlight SQL code inside PHP strings.
 let php_noShortTags = 1    "Disable PHP short tags.
+
+set foldmethod=syntax "syntax highlighting items specify folds  
+set foldcolumn=1 "defines 1 col at window left, to indicate folding  
+let javaScript_fold=1 "activate folding by JS syntax  
+let python_fold=1 "activate folding by JS syntax  
+set foldlevelstart=99 "start file with all folds opened
 
 let g:airline_powerline_fonts = 1 "Включить поддержку Powerline шрифтов
 let g:airline#extensions#keymap#enabled = 0 "Не показывать текущий маппинг
