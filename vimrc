@@ -55,6 +55,8 @@ filetype plugin indent on    " required
 " Настройки табов для Python, согласно рекоммендациям
 set tabstop=4 
 set shiftwidth=4
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
+autocmd FileType html       setlocal shiftwidth=2 tabstop=2
 set smarttab
 set expandtab "Ставим табы пробелами
 set softtabstop=4 "4 пробела в табе
@@ -65,6 +67,9 @@ let python_highlight_all = 1
 " Включаем 256 цветов в терминале, мы ведь работаем из иксов?
 " Нужно во многих терминалах, например в gnome-terminal
 set t_Co=256
+
+" Автосохранение при изменении текста
+autocmd TextChanged,TextChangedI <buffer> silent write
 
 " Перед сохранением вырезаем пробелы на концах (только в .py файлах)
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
