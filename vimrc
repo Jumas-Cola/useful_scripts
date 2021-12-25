@@ -6,6 +6,8 @@ call plug#begin('~/.vim/plugged')
 " Make sure you use single quotes
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+Plug 'ryanoasis/vim-devicons'
+Plug 'Yohannfra/Vim-Vim-Project'
 
 " Initialize plugin system
 call plug#end()
@@ -36,6 +38,7 @@ Plugin 'eugen0329/vim-esearch'
 Plugin 'fatih/vim-go'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'jelera/vim-javascript-syntax'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -69,7 +72,10 @@ let python_highlight_all = 1
 set t_Co=256
 
 " Автосохранение при изменении текста
-autocmd TextChanged,TextChangedI <buffer> silent write
+augroup AutoSave
+    autocmd!
+    autocmd TextChanged,TextChangedI * silent write
+augroup END
 
 " Перед сохранением вырезаем пробелы на концах (только в .py файлах)
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e ``
@@ -107,6 +113,7 @@ inoremap jk <esc>
 
 " Нумерация строк
 set number
+set relativenumber
 " Запретить перенос строк
 set nowrap
 
@@ -311,7 +318,7 @@ let php_noShortTags = 1    "Disable PHP short tags.
 set foldmethod=syntax "syntax highlighting items specify folds  
 set foldcolumn=1 "defines 1 col at window left, to indicate folding  
 let javaScript_fold=1 "activate folding by JS syntax  
-let python_fold=1 "activate folding by JS syntax  
+let python_fold=1
 set foldlevelstart=99 "start file with all folds opened
 
 let g:airline_powerline_fonts = 1 "Включить поддержку Powerline шрифтов
