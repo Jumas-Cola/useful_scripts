@@ -9,7 +9,7 @@ jdcal = "==1.4.1"
 numpy = "==1.16.4"
 openpyxl = "==2.6.2"
 shiboken2 = "==5.13.0"
-Pillow = "==6.0.0"
+Pillow = "==9.0.1"
 PySide2 = "==5.13.0"
 
 [dev-packages]
