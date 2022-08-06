@@ -5,13 +5,39 @@ call plug#begin('~/.vim/plugged')
 
 " Make sure you use single quotes
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" CoC recommended config
+let g:coc_start_at_startup = 1
+let g:coc_global_extensions = [
+\ 'coc-json',
+\ 'coc-css',
+\ 'coc-ultisnips',
+\ 'coc-tsserver',
+\ 'coc-eslint',
+\ 'coc-emmet',
+\ 'coc-tag',
+\ 'coc-omni',
+\ 'coc-syntax',
+\ 'coc-yaml',
+\ 'coc-solargraph',
+\ 'coc-psalm',
+\ 'coc-python',
+\ 'coc-html',
+\ 'coc-tailwindcss',
+\ 'coc-markdownlint',
+\ 'coc-highlight',
+\ 'coc-pairs',
+\ 'coc-blade',
+\ 'coc-docker',
+\ 'coc-php-cs-fixer',
+\ 'coc-sh',
+\ 'coc-snippets',
+\ 'coc-prettier',
+\ 'coc-lightbulb',
+\ ]
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-Plug 'ryanoasis/vim-devicons'
-Plug 'Yohannfra/Vim-Vim-Project'
 
 " Initialize plugin system
 call plug#end()
-
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -25,20 +51,19 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'git://git.wincent.com/command-t.git'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'rafi/awesome-vim-colorschemes'
-Plugin 'mattn/emmet-vim'
 Plugin 'tmhedberg/simpylfold'
 Plugin 'preservim/nerdtree'
-Plugin 'tell-k/vim-autopep8'
-Plugin 'iamcco/markdown-preview.nvim' 
 Plugin 'Yggdroot/indentLine'
 Plugin 'tpope/vim-commentary'
-Plugin 'townk/vim-autoclose'
-Plugin 'nelsyeung/twig.vim'
-Plugin 'eugen0329/vim-esearch'
-Plugin 'fatih/vim-go'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'jelera/vim-javascript-syntax'
+Plugin 'tpope/vim-surround'
+Plugin 'lfilho/cosco.vim'
+Plugin 'eugen0329/vim-esearch'
+Plugin 'mralejandro/vim-phpdoc'
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'preservim/tagbar'
+Plugin 'honza/vim-snippets'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -58,8 +83,8 @@ filetype plugin indent on    " required
 " Настройки табов для Python, согласно рекоммендациям
 set tabstop=4 
 set shiftwidth=4
-autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
-autocmd FileType html       setlocal shiftwidth=2 tabstop=2
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType html       setlocal shiftwidth=2 tabstop=2 softtabstop=2
 set smarttab
 set expandtab "Ставим табы пробелами
 set softtabstop=4 "4 пробела в табе
@@ -71,10 +96,13 @@ let python_highlight_all = 1
 " Нужно во многих терминалах, например в gnome-terminal
 set t_Co=256
 
+" Терминал по умолчанию
+set shell=fish
+
 " Автосохранение при изменении текста
 augroup AutoSave
     autocmd!
-    autocmd TextChanged,TextChangedI * silent write
+    autocmd TextChanged,TextChangedI * if &readonly == 0 && filereadable(bufname('%')) | silent write | endif
 augroup END
 
 " Перед сохранением вырезаем пробелы на концах (только в .py файлах)
@@ -84,7 +112,6 @@ autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,
 
 syntax on "Включить подсветку синтаксиса
 
-" set nu "Включаем нумерацию строк
 set mousehide "Спрятать курсор мыши когда набираем текст
 set mouse=a "Включить поддержку мыши
 set termencoding=utf-8 "Кодировка терминала
@@ -94,10 +121,6 @@ set t_vb= "Не пищать! (Опции 'не портить текст', к �
 set backspace=indent,eol,start whichwrap+=<,>,[,]
 " Вырубаем черточки на табах
 set showtabline=1
-
-" Переносим на другую строчку, разрываем строки
-" set wrap
-" set linebreak
 
 " Вырубаем .swp и ~ (резервные) файлы
 set nobackup
@@ -127,7 +150,7 @@ set visualbell t_vb=
 set guifont=Fira\ Code
 set background=dark
 set termguicolors
-colorscheme onedark
+colorscheme space-vim-dark
 
 " NERDTree shortcuts
 nnoremap <leader>n :NERDTreeFocus<CR>
@@ -135,50 +158,34 @@ nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 
-" NERDTree auto update
-autocmd BufWritePost * NERDTreeFocus | execute 'normal R' | wincmd p
-
-" Coc config
-" Set internal encoding of vim, not needed on neovim, since coc.nvim using some
-" unicode characters in the file autoload/float.vim
-set encoding=utf-8
-
-" TextEdit might fail if hidden is not set.
-set hidden
-
+" -------COC CONFIG-------
 " Some servers have issues with backup files, see #649.
 set nobackup
 set nowritebackup
-
-" Give more space for displaying messages.
-set cmdheight=2
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
 set updatetime=300
 
-" Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
-
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
-if has("nvim-0.5.0") || has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
+set signcolumn=yes
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#pum#visible() ? coc#pum#next(1):
+      \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-function! s:check_back_space() abort
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
@@ -189,11 +196,6 @@ if has('nvim')
 else
   inoremap <silent><expr> <c-@> coc#refresh()
 endif
-
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
@@ -207,15 +209,13 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> K :call ShowDocumentation()<CR>
 
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
     call CocActionAsync('doHover')
   else
-    execute '!' . &keywordprg . " " . expand('<cword>')
+    call feedkeys('K', 'in')
   endif
 endfunction
 
@@ -247,6 +247,9 @@ nmap <leader>ac  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
 
+" Run the Code Lens action on the current line.
+nmap <leader>cl  <Plug>(coc-codelens-action)
+
 " Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
 xmap if <Plug>(coc-funcobj-i)
@@ -274,13 +277,13 @@ nmap <silent> <C-s> <Plug>(coc-range-select)
 xmap <silent> <C-s> <Plug>(coc-range-select)
 
 " Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocAction('format')
+command! -nargs=0 Format :call CocActionAsync('format')
 
 " Add `:Fold` command to fold current buffer.
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
 
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
@@ -305,10 +308,38 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
-" Install Packages
-" :CocInstall coc-python
-" :CocInstall coc-tsserver
-" :CocInstall coc-phpls
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+" Use <leader>x for convert visual selected code to snippet
+xmap <leader>x  <Plug>(coc-convert-snippet)
+
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ CheckBackSpace() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! CheckBackSpace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
+
+" -------END COC CONFIG-------
 
 let php_folding = 1        "Set PHP folding of classes and functions.
 let php_htmlInStrings = 1  "Syntax highlight HTML code inside PHP strings.
@@ -327,5 +358,26 @@ let g:airline_section_z = "\ue0a1:%l/%L Col:%c" "Кастомная графа �
 let g:Powerline_symbols='unicode' "Поддержка unicode
 let g:airline#extensions#xkblayout#enabled = 0 "Про это позже расскажу
 
-" Custom Commands
-command PrettyJson %!python -m json.tool
+" Tagbar Setup
+nmap <F8> :TagbarToggle<CR>
+let g:tagbar_type_ps1 = {
+    \ 'ctagstype' : 'powershell',
+    \ 'kinds'     : [
+        \ 'f:function',
+        \ 'i:filter',
+        \ 'a:alias'
+    \ ]
+\ }
+
+" Auto semicolon
+autocmd FileType php,css,javascript nmap <silent> <Leader>; <Plug>(cosco-commaOrSemiColon)
+autocmd FileType php,css,javascript imap <silent> <Leader>; <c-o><Plug>(cosco-commaOrSemiColon)
+
+" PhpDoc
+nmap <Leader>d :call PhpDocPasteComment()<CR>
+
+" Php Cs Fixer
+nmap <Leader>c :call CocAction('codeAction')<CR>
+
+" Prettier
+nmap <Leader>p :CocCommand prettier.forceFormatDocument<CR>
