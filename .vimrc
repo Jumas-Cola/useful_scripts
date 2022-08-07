@@ -34,6 +34,8 @@ let g:coc_global_extensions = [
 \ 'coc-prettier',
 \ 'coc-lightbulb',
 \ 'coc-explorer',
+\ 'coc-lists',
+\ 'coc-git',
 \ ]
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
@@ -48,11 +50,8 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-fugitive'
 Plugin 'git://git.wincent.com/command-t.git'
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'rafi/awesome-vim-colorschemes'
-Plugin 'tmhedberg/simpylfold'
 Plugin 'Yggdroot/indentLine'
 Plugin 'tpope/vim-commentary'
 Plugin 'vim-airline/vim-airline'
